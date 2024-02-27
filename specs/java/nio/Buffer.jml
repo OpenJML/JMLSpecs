@@ -136,4 +136,16 @@ public abstract class Buffer {
     final int checkIndex(int i, int j);
     final int markValue();
     final void discardMark();
+    
+    //@ public normal_behavior
+    //@   requires true;
+    //@ pure
+    public abstract Buffer slice();
+    
+    //@ public normal_behavior
+    //@   requires true;
+    //@ pure
+    public abstract Buffer duplicate();
+
+
 }

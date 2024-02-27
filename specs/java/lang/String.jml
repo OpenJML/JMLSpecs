@@ -320,7 +320,7 @@ public final class String
       @   //-RAC@ ensures \result == (this.charArray.length == 0);
       @*/
     @Override
-    public /*@ pure @*/ boolean isEmpty();
+    public /*@ spec_pure @*/ boolean isEmpty();
 
     /*@ // Inherited from CharSequence:
       @ //also public normal_behavior
@@ -992,7 +992,7 @@ public final class String
       @  public normal_behavior
       @    ensures \result != null && \result == this;
       @*/
-    public /*@ pure @*/ /*@ non_null @*/ String toString();
+    public /*@ non_null @*/ String toString();
     
     /*-RAC@  public normal_behavior
       @    assignable \nothing;

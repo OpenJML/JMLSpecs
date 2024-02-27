@@ -91,6 +91,7 @@ public interface List<E> extends SequencedCollection<E> {
       @   also
       @     requires colSize > arrSize;
       @     assignable \nothing;
+      @     ensures \result != null;
       @     ensures \fresh(\result) && \result.length == colSize;
       @     ensures (\forall int k; 0 <= k && k < colSize;
       @                             \result[k] == values[k]);
@@ -101,6 +102,7 @@ public interface List<E> extends SequencedCollection<E> {
 
               // FIXME - spec the exceptions
       @*/
+    /*+RAC@ also public behavior requires true; */
     <T> T[] toArray(T[] a) throws NullPointerException;
 
     /*-RAC@ also public normal_behavior
@@ -113,6 +115,7 @@ public interface List<E> extends SequencedCollection<E> {
       @                    values[i] == \old(values[i]); 
       @   ensures values.contains(o);
       @*/
+    /*+RAC@ also public behavior requires true; */
     boolean add(E o);
 
 
@@ -132,6 +135,7 @@ public interface List<E> extends SequencedCollection<E> {
       @   signals_only NoSuchElementException;
       @*/
     // FIXME - watch out for optional exceptions
+    /*+RAC@ also public behavior requires true; */
     boolean remove(Object o);
 
     // specification inherited
@@ -163,6 +167,7 @@ public interface List<E> extends SequencedCollection<E> {
       @   requires !(o instanceof List && size() == ((List<E>) o).size());
       @   ensures !\result;
       @*/
+    /*+RAC@ also public behavior requires true; */
     @SuppressWarnings("unchecked")
     /*@ pure @*/ boolean equals(Object o);
 
@@ -211,6 +216,7 @@ public interface List<E> extends SequencedCollection<E> {
       @   signals_only IndexOutOfBoundsException;
       @ |}
       @*/
+    /*+RAC@ public behavior requires true; */
     E set(int index, E element);
     
     /*-RAC@ public behavior
@@ -257,6 +263,7 @@ public interface List<E> extends SequencedCollection<E> {
       @   signals_only IndexOutOfBoundsException;
       @ 
       @*/
+    /*+RAC@ public behavior requires true; */
     void add(int index, E element);
 
     /*-RAC@ public behavior
@@ -279,6 +286,7 @@ public interface List<E> extends SequencedCollection<E> {
       @   assignable \nothing;
       @   signals_only IndexOutOfBoundsException;
       @*/
+    /*+RAC@ public behavior requires true; */
     E remove(int index);
 
     /*@ public behavior

@@ -108,6 +108,16 @@ public interface CharSequence {
       @           && equal(\result.charArray,charArray);
       @*/
     public String toString();
+    
+    //@ spec_pure
+    public default boolean isEmpty();
+    
+    public default java.util.stream.IntStream chars();
+    
+    public default java.util.stream.IntStream codePoints();
+    
+    public static int compare(CharSequence csa, CharSequence csb);
+    
 
 // FIXME - need to permit interfaces to declare Object methods that are not implemented in the interface
 //    /** According to the javadocs, the equals method should not be called. */

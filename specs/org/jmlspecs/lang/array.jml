@@ -9,21 +9,21 @@ public class array<T> implements IJmlPrimitiveType, IJmlIntArrayLike {
     public normal_behavior
         ensures \result.length == a.length;
         ensures (\forall int i; 0 <= i < a.length; \result.get(i) == a[i]);
-    model heap_free public static <T> array<T> of(T[] a);
+    model heap_free spec_pure public static <T> array<T> of(T[] a);
     
     public normal_behavior
         ensures \result.length == a.length;
         ensures (\forall int i; 0 <= i < a.length; \result.get(i) == a[i]);
-    model heap_free public static <T,U> array<T> ofx(U[] a);  // U must be assignable to T
+    model heap_free spec_pure public static <T,U> array<T> ofx(U[] a);  // U must be assignable to T
     
     public normal_behavior
         ensures \result.length == a.length;
         ensures (\forall int i; 0 <= i < a.length; \result.get(i) == a[i]);
-    model heap_free public static array<Integer> of(int[] a);
+    model heap_free spec_pure public static array<Integer> of(int[] a);
     
     public normal_behavior
         ensures \result == this[i];
-    model heap_free public T get(\bigint i);
+    model heap_free spec_pure public T get(\bigint i);
     
     public normal_behavior
        ensures \result.length == this.length;

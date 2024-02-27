@@ -55,8 +55,8 @@ public class Object {
       @   reads \nothing;
       @*/
     public /*@ pure @*/ Object();
-
-
+    
+    
     /*+ESC@ public normal_behavior
       @   ensures \result == \erasure(\typeof(this));
       @*/
@@ -203,6 +203,7 @@ public class Object {
       @     assignable \nothing;
       @ // Ignore the case of what an Object actually produces as a String
       @*/
+    /*+RAC@ public normal_behavior requires true; */
     //@ model pure public non_null String ptoString();
     
     /*-RAC@   public normal_behavior // FIXME - do we want this to be normal_behavior?
@@ -215,6 +216,7 @@ public class Object {
     @     assignable \nothing;
     @ // Ignore the case of what an Object actually produces as a String
     @*/
+    /*+RAC@ public normal_behavior requires true; */
     public /*@ non_null @*/ String toString();
 
     //@ public normal_behavior

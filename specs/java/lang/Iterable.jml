@@ -34,6 +34,9 @@ public interface Iterable<T> {
       @*/
     
 
+    //@ public normal_behavior
+    //@   requires true;
+    //@ pure
     public Iterator<T> iterator();
     
     /*@ public behavior

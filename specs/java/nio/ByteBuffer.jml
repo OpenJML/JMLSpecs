@@ -292,7 +292,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
     
     //@ also public normal_behavior
     //@   ensures \result == _isDirect;
-    //@ pure
+    //@ spec_pure
     public abstract boolean isDirect();
     public String toString();
     public int hashCode();

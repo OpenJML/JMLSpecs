@@ -1,13 +1,74 @@
 package java.util;
 
 public interface SequencedCollection<E> extends Collection<E> {
-	
-	  public abstract java.util.SequencedCollection<E> reversed();
-	  public default void addFirst(E e);
-	  public default void addLast(E e);
-	  public default E getFirst();
-	  public default E getLast();
-	  public default E removeFirst();
-	  public default E removeLast();
+    
+    //@ pure
+    public abstract java.util.SequencedCollection<E> reversed();
+
+    /*-RAC@ public normal_behavior
+    @    requires containsNull || e != null;
+    @    assignable values;
+    @    ensures size() == \old(size()+1);
+    @    ensures \not_modified(containsNull);
+    @    //ensures get(0) == e;
+    @    //ensures (\forall int i; 1<=i && i<size();
+         //                      get(i) == \old(get(i-1)));
+    @*/    
+    /*+RAC@ public behavior requires true; */
+    public default void addFirst(E e);
+
+    /*-RAC@ public normal_behavior
+    @    requires containsNull || e != null;
+    @    assignable values;
+    @    ensures size() == \old(size()+1);
+    @    ensures \not_modified(containsNull);
+    @    //ensures get(size()-1) == e;
+    @    //ensures (\forall int i; 0<=i && i<(size()-1);
+         //                      get(i) == \old(get(i)));
+    @*/     
+    /*+RAC@ public behavior requires true; */
+    public default void addLast(E e);
+
+    //@ spec_pure
+    public default E getFirst();
+
+    //@ spec_pure
+    public default E getLast();
+    
+    /*-RAC@ public normal_behavior
+      @    requires !isEmpty();
+      @    assignable values;
+      @    ensures !containsNull ==> \result != null;
+      @    //ensures \result == get(0);
+      @    ensures size() == \old(size()-1);
+      @    ensures \not_modified(containsNull);
+      @    //ensures (\forall int i; 0<=i && i<size();
+      @    //                       get(i) == \old(get(i+1)));
+      @ also
+      @  public exceptional_behavior
+      @    requires isEmpty();
+      @    assignable \nothing;
+      @    signals_only NoSuchElementException;
+      @*/
+    /*+RAC@ public behavior requires true; */
+    public default E removeFirst();
+
+    /*-RAC@ public behavior
+      @    requires !isEmpty();
+      @    assignable values;
+      @    ensures !containsNull ==> \result != null;
+      @    //ensures \result == \old(get(size()-1));
+      @    ensures size() == \old(size()-1);
+      @    ensures \not_modified(containsNull);
+      @    //ensures (\forall int i; 0<=i && i<size();
+      @    //                     get(i) == \old(get(i)));
+      @ also 
+      @  public exceptional_behavior
+      @    requires isEmpty();
+      @    assignable \nothing;
+      @    signals_only NoSuchElementException;
+      @*/
+    /*+RAC@ public behavior requires true; */
+public default E removeLast();
 
 }

@@ -50,7 +50,7 @@ public interface JMLIterator<E> {
     /** Returns true if there is a next element */
     //@ public normal_behavior
     //@   ensures \not_assigned(position);
-    @Query
+    @SpecPure // FIXME - used to be @Query
     boolean hasNext();
     
     //@ requires hasNext();

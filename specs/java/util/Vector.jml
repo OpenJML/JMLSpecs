@@ -405,42 +405,10 @@ public class Vector<E> extends AbstractList<E>
       @*/
     public /*@ pure @*/ synchronized Object clone(); // Overrides Object
 
-    /*-RAC@ also public normal_behavior
-      @    ensures \result != null && \fresh(\result);
-      @    ensures \result.length == elementCount
-      @      && (\forall int i; 0 <= i && i < size();
-      @                         \result[i] == get(i));
-      @*/
+    // inherited spec
     public /*@ pure @*/ synchronized Object[] toArray();
 
-    /*-RAC@ also
-      @ public normal_behavior
-      @    requires a != null
-      @             && (\forall int i; 0 <= i && i < elementCount;
-      @                     get(i) == null ||
-      @                     \typeof(get(i)) <: \elemtype(\typeof(a)) );
-      @    {|
-      @       requires a.length < elementCount;
-      @       assignable \nothing;
-      @       ensures \result != null && \fresh(\result)
-      @         && \result.length == elementCount
-      @         && (\forall int i; 0 <= i && i < elementCount;
-      @                            \result[i] == get(i));
-      @     also
-      @       requires a.length == elementCount;
-      @       assignable a[0 .. (elementCount-1)];
-      @       ensures \result == a
-      @         && (\forall int i; 0 <= i && i < elementCount;
-      @                            \result[i] == get(i));
-      @     also
-      @       requires a.length > elementCount;
-      @       assignable a[0 .. elementCount];
-      @       ensures \result == a
-      @         && (\forall int i; 0 <= i && i < elementCount;
-      @                            \result[i] == get(i))
-      @         && \result[elementCount] == null;
-      @    |}
-      @*/
+    // inherited specs
     public synchronized <T> T[] toArray(T[] a);
 
      // FIXME - all inherited?
