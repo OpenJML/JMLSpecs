@@ -1,6 +1,6 @@
 package org.jmlspecs.lang;
 
-//@ immutable pure
+//@ immutable heap_free
 public class array<T> implements IJmlPrimitiveType, IJmlIntArrayLike {
  /*@   
     model public \bigint length;
@@ -9,46 +9,46 @@ public class array<T> implements IJmlPrimitiveType, IJmlIntArrayLike {
     public normal_behavior
         ensures \result.length == a.length;
         ensures (\forall int i; 0 <= i < a.length; \result.get(i) == a[i]);
-    model heap_free spec_pure public static <T> array<T> of(T[] a);
+    model public static <T> array<T> of(T[] a);
     
     public normal_behavior
         ensures \result.length == a.length;
         ensures (\forall int i; 0 <= i < a.length; \result.get(i) == a[i]);
-    model heap_free spec_pure public static <T,U> array<T> ofx(U[] a);  // U must be assignable to T
+    model public static <T,U> array<T> ofx(U[] a);  // U must be assignable to T
     
     public normal_behavior
         ensures \result.length == a.length;
         ensures (\forall int i; 0 <= i < a.length; \result.get(i) == a[i]);
-    model heap_free spec_pure public static array<Integer> of(int[] a);
+    model public static array<Integer> of(int[] a);
     
     public normal_behavior
         ensures \result == this[i];
-    model heap_free spec_pure public T get(\bigint i);
+    model public T get(\bigint i);
     
     public normal_behavior
        ensures \result.length == this.length;
        ensures \result[i] == t;
        ensures (\forall \bigint j; j != i ; this[j] == \result[j]);
        ensures this[i] == t ==> \result == this;
-    model heap_free public array<T> put(\bigint i, T t);
+    model public array<T> put(\bigint i, T t);
     
     public normal_behavior
        ensures \result.length == this.length + 1;
        ensures \result[this.length] == t;
        ensures (\forall \bigint j; j != this.length ; this[j] == \result[j]);
-    model heap_free public array<T> add(T t);
+    model public array<T> add(T t);
     
     public normal_behavior
        ensures \result == (s.length == ss.length && \forall \bigint i; 0 <= i && i < s.length; s[i] == ss[i]);
-    model heap_free public static <U,T> boolean equals(array<U> s, array<T> ss);
+    model public static <U,T> boolean equals(array<U> s, array<T> ss);
     
     public normal_behavior
        ensures \result == (this == s || equals(this,s));
-    model heap_free public boolean equals(array<T> s);
+    model public boolean equals(array<T> s);
     
     public normal_behavior
        ensures \result == (\exists \bigint i; 0 <= i < this.length; this[i] == v);
-    model heap_free public <T> boolean contains(T v);
+    model public <T> boolean contains(T v);
 
     @*/
 }

@@ -310,17 +310,17 @@ public final class String
     /*@ public normal_behavior
       @   //-RAC@ ensures \result == s.charArray.length;
       @
-      @ //@ heap_free
-      @ public static model pure helper int length(String s);
+      @ public static model spec_pure helper int length(String s);
       @*/
+    
     // inherits specs from CharSequence - \result == charArray.length
-    public /*@ pure helper heap_free @*/ int length();
+    public /*@ strictly_pure helper @*/ int length();
     
     /*@ also public normal_behavior
       @   //-RAC@ ensures \result == (this.charArray.length == 0);
       @*/
     @Override
-    public /*@ spec_pure @*/ boolean isEmpty();
+    public /*@ strictly_pure @*/ boolean isEmpty();
 
     /*@ // Inherited from CharSequence:
       @ //also public normal_behavior
@@ -330,7 +330,7 @@ public final class String
       @   requires index < 0 || index >= length();
       @   signals_only StringIndexOutOfBoundsException;
       @*/
-    public /*@ pure @*/ char charAt(int index)
+    public /*@ spec_pure @*/ char charAt(int index)
         throws StringIndexOutOfBoundsException;
 
     /*@  public normal_behavior
@@ -443,7 +443,7 @@ public final class String
                      (isInterned(s1) && isInterned(s2));
       @   ensures \result <==> (s1 == s2);
       @
-      @ pure heap_free
+      @ spec_pure
       @ public static model helper boolean equals(nullable String s1, nullable String s2);
       @*/
 
@@ -504,7 +504,7 @@ public final class String
       @   requires anotherString == this;
       @   ensures \result;
       @*/
-    //@ pure heap_free
+    //@ spec_pure
     public boolean equalsIgnoreCase(String anotherString);
 
     // FIXME - overly complicated for esc?
@@ -532,7 +532,7 @@ public final class String
       @               );
       @   |}
       @
-    public static pure model boolean lessThan(char[] s1,
+    public static spec_pure model boolean lessThan(char[] s1,
                                               char[] s2);  
       @*/
 
@@ -564,7 +564,7 @@ public final class String
                                        charEqualsIgnoreCase(s1[j],s2[j])))
       @               );
       @   |}
-    public static pure model boolean lessThanIgnoreCase(char[] s1,
+    public static spec_pure model boolean lessThanIgnoreCase(char[] s1,
                                               char[] s2);  @*/
 
     /*-RAC@ axiom (\forall char[] s1, s2; s1 != null && s2 != null;
@@ -919,12 +919,12 @@ public final class String
 
     /*@ public normal_behavior
            ensures !\fresh(\result); // TODO presuming interned for ease of proof
-        model public static pure helper heap_free non_null String split(String s, String regex, int position);
+        model public static pure helper non_null String split(String s, String regex, int position);
      */
         
     /*@ public normal_behavior
            ensures \result >= 1;
-        model public static pure helper heap_free int numsplit(String s, String regex);
+        model public static spec_pure helper int numsplit(String s, String regex);
      */
         
     /*@ public normal_behavior
@@ -1126,8 +1126,8 @@ public final class String
 
     //@ public normal_behavior
     //@   ensures true; // No restriction on result
-    //@ heap_free
-    //@ public pure helper static model boolean isInterned(non_null String s);
+    //@ spec_pure helper
+    //@ public static model boolean isInterned(non_null String s);
 
     
     //@ public normal_behavior

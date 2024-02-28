@@ -36,7 +36,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @     public normal_behavior
       @       assignable \nothing;
       @      ensures \result == parseable( s, 10 );
-      @   model public static pure boolean parseable( String s ) {
+      @   model public static spec_pure boolean parseable( String s ) {
       try { Byte ss = Byte.valueOf(s); return true; }   
       catch (Exception e) { return false; }
       }     
@@ -56,7 +56,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @               s != null && !s.equals("") &&
       @               (\forall int i; 1 <= i && i < s.length() && s.charAt(0) == '-';
       @                        Character.digit(s.charAt(i), r) != -1);
-      @   model public static pure boolean parseable( String s, int r ) {
+      @   model public static spec_pure boolean parseable( String s, int r ) {
       try { Byte ss = Byte.valueOf(s,r); return true; } 
       catch (Exception e) { return false; }     
       @   }
@@ -83,7 +83,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @      also
       @       ensures \result == parseable(nm);  // positive or negative byte, radix 10
       @     |}
-      @   model public static pure boolean decodeable( String nm ) {
+      @   model public static spec_pure boolean decodeable( String nm ) {
       try { decode(nm); return true; }
       catch (Exception e) { return false; }
       }
@@ -134,7 +134,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @      assignable \nothing;
       @      signals (NumberFormatException);
       @*/
-    public static /*@ pure @*/ byte parseByte(String s)
+    public static /*@ spec_pure @*/ byte parseByte(String s)
         throws NumberFormatException;
 
     /*@ public normal_behavior
@@ -151,7 +151,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @    requires s.equals("-34")  && radix == 10;
       @    ensures \result == -34;
       @*/
-    public static /*@ pure @*/ byte parseByte(String s, int radix)
+    public static /*@ spec_pure @*/ byte parseByte(String s, int radix)
         throws NumberFormatException;
 
     /*@ public normal_behavior
@@ -216,7 +216,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @   public normal_behavior
       @     ensures \result == theByte;
       @*/
-    //@ pure helper
+    //@ spec_pure helper
     public byte byteValue();
 
     /*@ also
@@ -224,7 +224,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @     assignable \nothing;
       @     ensures \result == (short) theByte;
       @*/
-    //@ pure helper
+    //@ spec_pure helper
     public short shortValue();
 
     /*@ also
@@ -232,7 +232,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @     assignable \nothing;
       @     ensures \result == (int) theByte;
       @*/
-    //@ pure helper
+    //@ spec_pure helper
     public int intValue();
 
     /*@ also
@@ -240,7 +240,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @     assignable \nothing;
       @     ensures \result == (long) theByte;
       @*/
-    //@ pure helper
+    //@ spec_pure helper
     public long longValue();
 
     /*@ also
@@ -248,7 +248,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @     assignable \nothing;
       @     ensures \result == (float) theByte;
       @*/
-    //@ pure helper
+    //@ spec_pure helper
     public float floatValue();
 
     /*@ also
@@ -256,7 +256,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @     assignable \nothing;
       @     ensures \result == (double) theByte;
       @*/
-    //@ pure helper
+    //@ spec_pure helper
     public double doubleValue();
 
     // specification inherited from Object
@@ -267,6 +267,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @     assignable \nothing;
       @     ensures (* \result is a hash code for this object *);
       @*/
+    //@ spec_pure
     public int hashCode();
 
     /*@ also
@@ -281,7 +282,7 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @     ensures !\result;
       @   |}
       @*/
-    public /*@ pure @*/ boolean equals(Object obj);
+    public /*@ spec_pure @*/ boolean equals(Object obj);
 
     /*@ also public normal_behavior
       @ {|
@@ -297,30 +298,30 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
       @   assignable \nothing;
       @   ensures \result > 0;
       @ |}
-      @*/
+      @*/ //@ spec_pure
     public int compareTo(/*@ non_null */ Byte anotherByte);
 
     //@ public normal_behavior
     //@   ensures \result == (x >= 0 ? x: x+256);
-    //@ pure helper heap_free
+    //@ heap_free helper
     public static int toUnsignedInt(byte x);
     
     //@ public normal_behavior
     //@   ensures \result == (x >= 0 ? x: x+256);
-    //@ pure helper heap_free
+    //@ heap_free helper
     public static long toUnsignedLong(byte x);
     
     //@ public normal_behavior
     //@   ensures \result == (hi>=0?hi:hi+256)*256+(lo>=0?lo:lo+256);
-    //@ model public static pure helper heap_free int toUnsignedInt(byte hi, byte lo);
+    //@ model public static helper heap_free int toUnsignedInt(byte hi, byte lo);
 
     //@ public normal_behavior
     //@   requires 0 <= i <= 255;
     //@   ensures \result == (byte)(i<128?i:i-256);
-    //@ model public static pure helper heap_free byte unsignedCast(int i);
+    //@ model public static heap_free helper byte unsignedCast(int i);
 
     //@ public normal_behavior
     //@   requires 0 <= i <= 255;
     //@   ensures (byte)i == (byte)(i<128?i:i-256);
-    //@ model public static pure helper heap_free void unsignedCastLemma(int i);
+    //@ model public static heap_free helper void unsignedCastLemma(int i);
 }

@@ -37,8 +37,8 @@ public abstract class Number implements java.io.Serializable {
       @ public normal_behavior
       @   requires Character.MIN_RADIX <= radix <= Character.MAX_RADIX;
       @   ensures \result == (val != null && val.length() > 0);
-      @ pure
-      @ public static model helper heap_free boolean parseable(nullable String val, int radix);
+      @ strictly_pure
+      @ public static model helper boolean parseable(nullable String val, int radix);
      */
 
   /* FIXME - include this when we can reason about characters @
@@ -131,7 +131,7 @@ public abstract class Number implements java.io.Serializable {
   //-RAC@   public normal_behavior
   //-RAC@     requires bits > 0;
   //-RAC@     // String nm is non-null by default
-  //-RAC@   model public helper heap_free static pure boolean decodable( String nm, int bits );
+  //-RAC@   model public helper static spec_pure boolean decodable( String nm, int bits );
 
 
     /*@ public normal_behavior

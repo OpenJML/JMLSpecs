@@ -1,6 +1,6 @@
 package org.jmlspecs.lang;
 
-//@ immutable pure
+//@ immutable heap_free
 public class intset implements IJmlPrimitiveType, IJmlIntArrayLike {
 /*@    
     public normal_behavior
@@ -13,7 +13,6 @@ public class intset implements IJmlPrimitiveType, IJmlIntArrayLike {
 
     public normal_behavior
       ensures \result == (this.size() == 0);
-    pure
     model heap_free public boolean empty();
     
     public normal_behavior

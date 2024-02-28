@@ -59,7 +59,7 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
     @                      by the IEEE 754 standards *);
     @        ensures !\result;
     @      |}
-    @  public static pure model heap_free boolean parseable( String s ) {
+    @  public static spec_pure model boolean parseable( String s ) {
         try { Double d = Double.valueOf(s); return true; }
         catch (Exception e) { return false; }
     }
@@ -102,14 +102,14 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
       @     requires s != null && !parseable(s);
       @     signals(NumberFormatException);
       @*/
-    public static /*@ heap_free pure @*/ /*@ non_null @*/ Double valueOf(
+    public static /*@ pure @*/ /*@ non_null @*/ Double valueOf(
         /*@ non_null @*/ String s)
         throws NumberFormatException;
 
     /*@ public normal_behavior
       @   ensures identical(\result.theDouble, d);
       @*/
-    public static /*@ heap_free pure @*/ /*@ non_null @*/ Double valueOf(double d);
+    public static /*@ pure @*/ /*@ non_null @*/ Double valueOf(double d);
     
     /*@ public normal_behavior
       @    requires s != null && parseable(s);
@@ -119,24 +119,24 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
       @   requires s != null && !parseable(s);
       @   signals(NumberFormatException);
       @*/
-    public static /*@ pure heap_free @*/ double parseDouble(/*@ non_null @*/ String s)
+    public static /*@ spec_pure @*/ double parseDouble(/*@ non_null @*/ String s)
         throws NumberFormatException;
 
     //@ public normal_behavior
     //@   ensures true; // uninterpreted
-    //@ pure helper heap_free
+    //@ spec_pure helper
     public static boolean isFinite(double v);
     
     /*@ public normal_behavior
       @   ensures \result == (!isFinite(v) && !isInfinite(v));
       @*/
-    public static /*@ pure helper  @*/ boolean isNaN(double v);
+    public static /*@ spec_pure helper  @*/ boolean isNaN(double v);
 
     /*@ public normal_behavior
       @   ensures \result <==>
       @           (v == POSITIVE_INFINITY || v == NEGATIVE_INFINITY);
       @*/
-    public static /*@ pure helper @*/ boolean isInfinite(double v);
+    public static /*@ spec_pure helper @*/ boolean isInfinite(double v);
 
     //@ public normal_behavior
     //@   ensures identical(theDouble, value);
@@ -390,7 +390,7 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
     /** Returns true if the argument is a negative (and not positive) zero;
         the usual == returns true for comparing positive and negative zero.
     */  
-    /*@ public static model pure helper heap_free boolean isNegativeZero( double a) {
+    /*@ public static model spec_pure helper boolean isNegativeZero( double a) {
           if (a != 0) return false;
           return (java.lang.Double.valueOf(a)).equals(java.lang.Double.valueOf("-0.0"));
         } 
@@ -400,7 +400,7 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
         the usual == returns true for comparing positive and negative zero.
     */ 
 
-    /*@ public static model pure helper heap_free boolean isPositiveZero( double a) {
+    /*@ public static model spec_pure helper boolean isPositiveZero( double a) {
           if (a != 0) return false;
           return (java.lang.Double.valueOf(a)).equals(java.lang.Double.valueOf("+0.0"));
         }    
@@ -417,7 +417,7 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
                               (isNaN(a) || isNaN(b) || (a==b))
                               );
      */
-    /*@ public static model pure heap_free helper boolean identical(double a, double b) {
+    /*@ public static model spec_pure helper boolean identical(double a, double b) {
       return (isNaN(a) == isNaN(b)) &&
                  (isPositiveZero(a) == isPositiveZero(b)) &&
          (isNegativeZero(a) == isNegativeZero(b)) &&

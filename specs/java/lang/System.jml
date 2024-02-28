@@ -321,7 +321,7 @@ t *);
     
     //@ public normal_behavior
     //@  requires \invariant_for(x); // FIXME - should not be needed?
-    //@ pure helper heap_free
+    //@ spec_pure helper
     public static native int identityHashCode(/*@nullable*/ Object x);
 
     //-RAC@ public model static non_null Properties systemProperties;
@@ -341,7 +341,7 @@ t *);
       @    //signals (SecurityException) (* if access is not permitted *);
       @*/
     //@ helper // TODO - reads?
-    public /*@ pure heap_free @*/ static /*@ non_null @*/ Properties getProperties();
+    public /*@ spec_pure @*/ static /*@ non_null @*/ Properties getProperties();
 
     /*-RAC@ 
       @ public behavior

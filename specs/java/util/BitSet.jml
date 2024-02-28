@@ -16,13 +16,13 @@ public class BitSet implements Cloneable, java.io.Serializable{
       @
       @ public normal_behavior
       @   ensures \result >= 0;
-      @ model public heap_free static pure int size(Content content);
+      @ model public static spec_pure int size(Content content);
       @
       @ public normal_behavior
       @   ensures \result >= 0;
-      @ model public heap_free static pure int cardinality(Content content);
+      @ model public heap_free static int cardinality(Content content);
       @
-      @ model public heap_free static pure boolean isSet(Content c, int index);
+      @ model public heap_free static boolean isSet(Content c, int index);
       @*/
 
     //@ normal_behavior
@@ -62,14 +62,14 @@ public class BitSet implements Cloneable, java.io.Serializable{
       @   ensures \result > 0 ==> (isSet(content,\result-1) &&
       @                      (\forall int i; \result <= i; !isSet(content,i)));
       @*/
-    //@ pure
+    //@ spec_pure
     public int length();
 
     //@ public normal_behavior
     //-RAC@   ensures \result == size(content);
     //@   ensures \result >= 0;
     //@   ensures \result >= length();
-    //@ pure
+    //@ spec_pure
     public int size();
 
     /*-RAC@ public normal_behavior
