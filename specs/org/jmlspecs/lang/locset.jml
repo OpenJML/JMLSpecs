@@ -1,0 +1,56 @@
+package org.jmlspecs.lang;
+
+//@ immutable pure
+abstract public class locset implements IJmlPrimitiveType {
+   
+//    public normal_behavior
+//      ensures \result >= 0;
+//    model public \bigint size();
+    
+    //@ public normal_behavior
+    //@   requires true;
+    //@ no_state
+    abstract public boolean contains(locset x);
+
+    //@ public normal_behavior
+    //@   ensures true;
+    //@ no_state
+    public static boolean empty();
+/*    
+    //@ public normal_behavior
+    //@  //ensures \result.size() == 0;
+    //@  ensures true;//(\forall locset x; ; !\result.contains(x));
+    //@ no_state
+    static public locset locset();
+*/        
+    //@ public normal_behavior
+    //@   ensures true;//\result == (\forall locset t;; s.contains(t) == ss.contains(t));
+    //@ no_state
+    public static boolean eq(locset s, locset ss);
+    
+    //@ public normal_behavior
+    //@   ensures true;//\result == (this == s || equals(this,s));
+    //@ no_state
+    abstract public boolean eq(locset s);
+    
+    //@ public normal_behavior // Specs are more successful when written without spec cases
+    //@   //ensures this.contains(x) ==> \result == this;
+    //@   //ensures !this.contains(x) ==> \result.size() == this.size() + 1;
+    //@  //ensures \result.contains(x);
+    //@  // FIXME ensures (\forall locset t; t != x; \result.contains(t) == this.contains(t));
+    //@   ensures true;
+    //@ no_state
+    abstract public locset add(locset x);
+    
+    //@ public normal_behavior
+    // @   ensures !this.contains(x) ==> \result == this;
+    // @   ensures this.contains(x) ==> \result.size() == this.size() - 1;
+    // @   ensures !\result.contains(x);
+    // @   ensures \forall locset t;; x.contains(t) ==> !\result.contains(t);
+    // @   ensures \forall locset t;; this.contains(t) && !x.contains(t) ==> \result.contains(t);
+    //@   ensures true;
+    //@ no_state
+    abstract public locset remove(locset x);
+    
+
+}

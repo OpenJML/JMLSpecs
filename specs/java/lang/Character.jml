@@ -271,17 +271,17 @@ public /*@ pure @*/ final
     /*@  public normal_behavior
       @   ensures \result <==> getType(ch) == LOWERCASE_LETTER;
       @*/
-    public static /*@ helper heap_free @*/ boolean isLowerCase(char ch);
+    public static /*@ helper no_state @*/ boolean isLowerCase(char ch);
 
     /*@  public normal_behavior
       @   ensures \result <==> getType(ch) == UPPERCASE_LETTER;
       @*/
-    public static /*@ helper heap_free @*/ boolean isUpperCase(char ch);
+    public static /*@ helper no_state @*/ boolean isUpperCase(char ch);
 
     /*@  public normal_behavior
       @  ensures \result <==> getType(ch) == TITLECASE_LETTER;
       @*/
-    public static /*@ helper heap_free @*/ boolean isTitleCase(char ch);
+    public static /*@ helper no_state @*/ boolean isTitleCase(char ch);
 
     //@ axiom isDigit('0');
     //@ axiom isDigit('1');
@@ -299,12 +299,12 @@ public /*@ pure @*/ final
     /*@  public normal_behavior
       @   ensures \result <==> getType(ch) == DECIMAL_DIGIT_NUMBER;
       @*/
-    public static /*@ heap_free helper @*/ boolean isDigit(char ch);
+    public static /*@ no_state helper @*/ boolean isDigit(char ch);
 
     /*@  public normal_behavior
       @   ensures \result <==> getType(ch) != UNASSIGNED;
       @*/
-    public static /*@ heap_free helper @*/ boolean isDefined(char ch);
+    public static /*@ no_state helper @*/ boolean isDefined(char ch);
 
     /*@  public normal_behavior
       @   ensures \result <==>
@@ -314,24 +314,24 @@ public /*@ pure @*/ final
       @               getType(ch) == MODIFIER_LETTER ||
       @               getType(ch) == OTHER_LETTER;
       @*/
-    public static /*@ heap_free helper @*/ boolean isLetter(char ch);
+    public static /*@ no_state helper @*/ boolean isLetter(char ch);
 
     /*@  public normal_behavior
       @  ensures \result <==> isDigit(ch) || isLetter(ch);
       @*/
-    public static /*@ heap_free helper @*/ boolean isLetterOrDigit(char ch);
+    public static /*@ no_state helper @*/ boolean isLetterOrDigit(char ch);
 
     /** @deprecated Replaced by isJavaIdentifierStart(char). */
     /*@  public normal_behavior
       @   ensures \result <==> isJavaIdentifierStart(ch);
       @*/
-    @Deprecated public static /*@ heap_free helper @*/ boolean isJavaLetter(char ch);
+    @Deprecated public static /*@ no_state helper @*/ boolean isJavaLetter(char ch);
 
     /** @deprecated Replaced by isJavaIdentifierPart(char). */
     /*@  public normal_behavior
       @   ensures \result <==> isJavaIdentifierPart(ch);
       @*/
-    @Deprecated public static /*@ heap_free helper @*/ boolean isJavaLetterOrDigit(char ch);
+    @Deprecated public static /*@ no_state helper @*/ boolean isJavaLetterOrDigit(char ch);
 
     /*@  public normal_behavior
       @   ensures \result <==> isLetter(ch) || 
@@ -339,7 +339,7 @@ public /*@ pure @*/ final
       @                         getType(ch) == CONNECTOR_PUNCTUATION;
       @  //(* ch is permissible as the first character in a Java identifier *);
       @*/
-    public static /*@ heap_free helper @*/ boolean isJavaIdentifierStart(char ch);
+    public static /*@ no_state helper @*/ boolean isJavaIdentifierStart(char ch);
 
     /*@  public normal_behavior
       @   ensures \result <==> isJavaIdentifierStart(ch) ||
@@ -350,13 +350,13 @@ public /*@ pure @*/ final
       @                         isIdentifierIgnorable(ch);
       @  //(* ch is permissible as a character in a Java identifier *);
       @*/
-    public static /*@ heap_free helper @*/ boolean isJavaIdentifierPart(char ch);
+    public static /*@ no_state helper @*/ boolean isJavaIdentifierPart(char ch);
 
     /*@  public normal_behavior
       @   ensures \result <==> isLetter(ch);
       @  //(* ch is permissible as the first character in a Unicode identifier *);
       @*/
-    public static /*@ heap_free helper @*/ boolean isUnicodeIdentifierStart(char ch);
+    public static /*@ no_state helper @*/ boolean isUnicodeIdentifierStart(char ch);
 
     /*@  public normal_behavior
       @   ensures \result <==> isLetter(ch) ||
@@ -368,7 +368,7 @@ public /*@ pure @*/ final
       @                         isIdentifierIgnorable(ch);
       @ //(* ch is permissible as a character in a Unicode identifier *);
       @*/
-    public static /*@ heap_free helper @*/ boolean isUnicodeIdentifierPart(char ch);
+    public static /*@ no_state helper @*/ boolean isUnicodeIdentifierPart(char ch);
 
     /*@  public normal_behavior
       @   ensures \result <==> ('\u0000' <= ch && ch <= '\u0008') ||
@@ -379,7 +379,7 @@ public /*@ pure @*/ final
       @                         ('\u206A' <= ch && ch <= '\u206F') ||
       @                         ch == '\uFEFF';
       @*/
-    public static /*@ heap_free helper @*/ boolean isIdentifierIgnorable(char ch);
+    public static /*@ no_state helper @*/ boolean isIdentifierIgnorable(char ch);
 
     /*@  public normal_behavior
       @  {|
@@ -393,7 +393,7 @@ public /*@ pure @*/ final
       @    ensures \result == ch;
       @  |}
       @*/
-    public static /*@ heap_free helper @*/ char toLowerCase(char ch);
+    public static /*@ no_state helper @*/ char toLowerCase(char ch);
 
     /*@  public normal_behavior
       @  {|
@@ -407,7 +407,7 @@ public /*@ pure @*/ final
       @    ensures \result == ch;
       @  |}
       @*/
-    public static /*@ heap_free helper @*/ char toUpperCase(char ch);
+    public static /*@ no_state helper @*/ char toUpperCase(char ch);
 
     /*@  public normal_behavior
       @  {|
@@ -421,7 +421,7 @@ public /*@ pure @*/ final
       @    ensures \result == ch;
       @  |}
       @*/
-    public static /*@ heap_free helper @*/ char toTitleCase(char ch);
+    public static /*@ no_state helper @*/ char toTitleCase(char ch);
 
     //@ axiom digitVal('0') == 0;
     //@ axiom digitVal('1') == 1;
@@ -435,7 +435,7 @@ public /*@ pure @*/ final
     //@ axiom digitVal('9') == 9;
     //@ public normal_behavior
     //@   ensures -1 <= \result && \result <= 9;
-    /*@ public static model helper heap_free int digitVal(char ch)
+    /*@ public static model helper no_state int digitVal(char ch)
       @ {
       @   if (!isDigit(ch)) {
       @     return -1;
@@ -486,7 +486,7 @@ public /*@ pure @*/ final
       @   ensures -1 <= \result && \result < radix;
       @ |}
       @*/
-    public static /*@ heap_free helper @*/ int digit(char ch, int radix);
+    public static /*@ no_state helper @*/ int digit(char ch, int radix);
 
     /*@  public normal_behavior
       @  {|
@@ -505,7 +505,7 @@ public /*@ pure @*/ final
       @    ensures \result == -1;
       @  |}
       @*/
-    public static /*@ heap_free helper @*/ int getNumericValue(char ch); 
+    public static /*@ no_state helper @*/ int getNumericValue(char ch); 
 
     /** @deprecated Replaced by isWhitespace(char). */
     /*@  public normal_behavior
@@ -515,7 +515,7 @@ public /*@ pure @*/ final
       @                         ch == '\r' ||
       @                         ch == ' ';
       @*/
-    @Deprecated public static /*@ heap_free helper @*/ boolean isSpace(char ch);
+    @Deprecated public static /*@ no_state helper @*/ boolean isSpace(char ch);
 
     /*@  public normal_behavior
       @   ensures \result <==> 
@@ -523,7 +523,7 @@ public /*@ pure @*/ final
       @              getType(ch) == LINE_SEPARATOR ||
       @              getType(ch) == PARAGRAPH_SEPARATOR;
       @*/
-    public static /*@ heap_free helper @*/ boolean isSpaceChar(char ch);
+    public static /*@ no_state helper @*/ boolean isSpaceChar(char ch);
 
     /*@  public normal_behavior
       @   ensures \result <==> (getType(ch) == SPACE_SEPARATOR &&
@@ -546,7 +546,7 @@ public /*@ pure @*/ final
       @                         ch == '\u001E' ||  // RECORD SEPARATOR
       @                         ch == '\u001F';    // UNIT SEPARATOR 
       @*/
-    public static /*@ heap_free helper @*/ boolean isWhitespace(char ch); 
+    public static /*@ no_state helper @*/ boolean isWhitespace(char ch); 
 
     /*@  public normal_behavior
       @   ensures \result <==> getType(ch) == CONTROL;
@@ -554,14 +554,14 @@ public /*@ pure @*/ final
       @                ('\u0000' <= ch && ch <= '\u001F')
       @                 || ('\u007F' <= ch && ch <= '\u009F');
       @*/
-    public static /*@ heap_free helper @*/ boolean isISOControl(char ch);
+    public static /*@ no_state helper @*/ boolean isISOControl(char ch);
 
     /*@  public normal_behavior
       @   ensures UNASSIGNED <= \result && \result <= OTHER_SYMBOL
       @            && (* \result == the Unicode character category of ch *);
       @   ensures (ch == '\u0020' || ch == '\u00A0' || ch == '\u2000') ==> (\result == SPACE_SEPARATOR);
       @*/
-    public static /*@ helper heap_free @*/ int getType(char ch);
+    public static /*@ helper no_state @*/ int getType(char ch);
 
     /*@  public normal_behavior
       @ {|
@@ -582,11 +582,11 @@ public /*@ pure @*/ final
       @   ensures \result == '\u0000';
       @ |}
       @*/
-    public static /*@ helper heap_free @*/ char forDigit(int digit, int radix);
+    public static /*@ helper no_state @*/ char forDigit(int digit, int radix);
 
-    public static /*@ helper heap_free @*/ byte getDirectionality(char c);
+    public static /*@ helper no_state @*/ byte getDirectionality(char c);
 
-    public static /*@ helper heap_free @*/ boolean isMirrored(char c);
+    public static /*@ helper no_state @*/ boolean isMirrored(char c);
 
     /*@ also public normal_behavior
       @   ensures (int)this == (int)anotherCharacter ==> \result == 0;

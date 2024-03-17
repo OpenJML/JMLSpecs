@@ -32,7 +32,7 @@ public abstract class InputStream implements Closeable {
     // FIXME - should modify objectState and then use not_modified on any
     // vars that are unchanged
 
-    //@ public model JMLDataGroup streamState; in objectState;
+    //@ model public \datagroup streamState; in objectState;
 
     // inputBytes models the bytes that have been or will be
     // read between the opening and the closing of the InputStream

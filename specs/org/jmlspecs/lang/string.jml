@@ -31,19 +31,19 @@ public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
   
     //@ public normal_behavior
     //@   ensures \result == length;
-    //@ heap_free 
+    //@ no_state 
     public long size();
     
     //@ public normal_behavior
     //@   ensures \result == this[i];
-    //@ heap_free
+    //@ no_state
     public char get(int i);  // FIXME _ change argument to bigint eventually
 
     //@ public normal_behavior
     //@   ensures \result.length == s.length + ss.length;
     //-RAC@ ensures \forall int k; 0 <= k < s.length; \result[k] == s[k];
     //-RAC@ ensures \forall int k; 0 <= k < ss.length; \result[k+s.length] == ss[k];
-    //@ heap_free
+    //@ no_state
     public static string concat(string s, string ss);
  
    
@@ -52,20 +52,20 @@ public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
     //@     ensures \result[i] == c;
     //-RAC@ ensures \forall \bigint j; j != i; \result[j] == this[j];
     //@     ensures this[i] == c ==> \result == this;
-    //@ heap_free 
+    //@ no_state 
     public string put(int i, char c);
  
     //@ public normal_behavior
     //-RAC@ ensures \result == (s.length == ss.length && (\forall \bigint i; 0 <= i < s.length; s[i] == ss[i] ));
-    //@ heap_free
+    //@ no_state
     public static boolean eq(string s, string ss);
     
-    public static boolean equals(Object o, Object oo);
+    //@ ensures false; // Not defined for JML primitive types. Use eq.
     public boolean equals(Object o);
     
     //@ public normal_behavior
-    //@   ensures \result == (this == s || equals(this,s));
-    //@ heap_free
+    //@   ensures \result == (this == s || eq(this,s));
+    //@ no_state
     public boolean eq(string s);
 
 
@@ -75,21 +75,21 @@ public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
     //-RAC@ ensures (\forall \bigint i;; (0 <= i < j) ==> (\result[i] == this[i]));
     //-RAC@ ensures (\forall \bigint i;; (j+1 <= i < \result.length) ==> (\result[i] == this[i-1]));
     //@   ensures \result[j] == v;
-    //@ heap_free 
+    //@ no_state 
     public string insert(int j, char v);// FIXME _ change int to bigint eventually
 
     //@ public normal_behavior
     //@   ensures \result.length == this.length + 1;
     //-RAC@ ensures (\forall \bigint i;; (0 <= i < this.length) ==> (\result[i] == this[i]));
     //@  ensures \result[this.length] == v;
-    //@ heap_free
+    //@ no_state
     public string add(char v);
 
     //@ public normal_behavior
     //@   ensures \result.length == this.length + s.length;
     //@   ensures (\forall \bigint i; 0 <= i < this.length ; (\result[i] == this[i]));
     //@   ensures (\forall \bigint i; 0 <= i < s.length ; (\result[i+this.length] == this[i-1]));
-    //@ heap_free
+    //@ no_state
     public string append(string s);
 
     //@ public normal_behavior
@@ -97,14 +97,14 @@ public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
     //@   ensures \result.length == this.length - 1;
     //@   ensures (\forall \bigint i;; (0 <= i < j) ==> (\result[i] == this[i]));
     //@   ensures (\forall \bigint i;; (j <= i < \result.length) ==> (\result[i] == this[i+1]));
-    //@  heap_free
+    //@  no_state
     public string remove(int j);
     
     //@ public normal_behavior
     //@   requires 0 <= start <= end <= this.length;
     //@   ensures \result.length == end - start;
     //@   ensures (\forall \bigint i;; (0 <= i < \result.length) ==> \result[i] == this[i+start]);
-    //@ heap_free 
+    //@ no_state 
     public string substring(int start, int end);
   
 

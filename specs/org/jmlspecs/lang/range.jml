@@ -1,6 +1,6 @@
 package org.jmlspecs.lang;
 
-//@ immutable heap_free 
+//@ immutable no_state 
 public class range implements IJmlPrimitiveType {
 	
 	private range();

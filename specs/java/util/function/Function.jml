@@ -4,7 +4,7 @@ package java.util.function;
 @FunctionalInterface
 public interface Function<T,R> {
 
-      //@ model public instance JMLDataGroup applyFrame;
+      //@ model public instance \datagroup applyFrame;
       
       //@ public normal_behavior
       //@   assignable applyFrame;

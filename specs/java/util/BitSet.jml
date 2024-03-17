@@ -20,9 +20,9 @@ public class BitSet implements Cloneable, java.io.Serializable{
       @
       @ public normal_behavior
       @   ensures \result >= 0;
-      @ model public heap_free static int cardinality(Content content);
+      @ model public no_state static int cardinality(Content content);
       @
-      @ model public heap_free static boolean isSet(Content c, int index);
+      @ model public no_state static boolean isSet(Content c, int index);
       @*/
 
     //@ normal_behavior

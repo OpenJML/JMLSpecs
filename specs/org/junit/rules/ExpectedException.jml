@@ -5,7 +5,7 @@ import org.hamcrest.Matcher;
 //@ non_null_by_default // FIXME - verify this
 public class ExpectedException {
     
-    //@ model public JMLDataGroup expectedExceptions;
+    //@ model public \datagroup expectedExceptions;
     //@ model public boolean exceptionAllowed; in expectedExceptions;
     
     //@ public normal_behavior

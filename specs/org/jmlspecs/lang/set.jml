@@ -2,68 +2,84 @@ package org.jmlspecs.lang;
 
 //@ immutable pure nullable_by_default
 public class set<T> implements IJmlPrimitiveType, IJmlArrayLike {
-/*@ 
+
  
-    model public final \bigint size;
+    //@ model public final \bigint size;
     
-    public normal_behavior
-      ensures \result == size;
-      ensures \result >= 0;
-    model heap_free public \bigint size();
+    //@ public normal_behavior
+    //@   ensures \result == size;
+    //@   ensures \result >= 0;
+    //@ no_state
+    public long size(); // FIXME - change to bigint eventually
     
-    public normal_behavior
-       ensures \result == this[x];
-    model heap_free public boolean contains(T x);
+    //@ public normal_behavior
+    //@   ensures \result == this[x];
+    //@ no_state
+    //@ model public boolean contains(T x);
 
-    public normal_behavior
-      ensures \result == (this.size() == 0);
-    model heap_free public boolean isEmpty();
+    //@ public normal_behavior
+    //@   ensures \result == (this.size() == 0);
+    //@ no_state
+  //@ model public boolean isEmpty();
     
-    public normal_behavior
-      ensures \result.size() == 0;
-      ensures (\forall T x; ; !\result.contains(x));
-    model heap_free static public <T> set<T> set();
+    //@ public normal_behavior
+    //@   ensures \result.size() == 0;
+    //@   ensures (\forall T x; ; !\result.contains(x));
+    //@ no_state
+    static public <T> set<T> set();
     
-    public normal_behavior
-      ensures \result.size() == 1;
-      ensures \result.contains(t);
-      ensures (\forall T x; ; x != t ==> !\result.contains(x));
-    model heap_free static public <T> set<T> set(T t);
+    //@ public normal_behavior
+    //@   ensures \result.size() == 1;
+    //@  ensures \result.contains(t);
+    //@  ensures (\forall TT x; ; x != t ==> !\result.contains(x));  // FIXME - thinks T is non-static
+    //@ no_state
+  //@ model static public <TT> set<TT> set(TT t);
     
-    public normal_behavior
-       ensures \result == (\forall T t;; s.contains(t) == ss.contains(t));
-    model heap_free public static <T> boolean equals(set<T> s, set<T> ss);
+    //@ public normal_behavior
+    //@   ensures \result == (\forall TT t;; s.contains(t) == ss.contains(t));
+    //@ no_state
+  //@ model public static <TT> boolean eq(set<TT> s, set<TT> ss);
     
-    public normal_behavior
-       ensures \result == (this == s || equals(this,s));
-    model heap_free public boolean equals(set<T> s);
+    //@ public normal_behavior
+    //@   ensures \result == (this == s || eq(this,s));
+    //@ no_state
+  //@ model public boolean equals(set<T> s);
     
-    public normal_behavior
-       ensures \result == (\forall T t; s.contains(t) ; ss.contains(t));
-    model heap_free public static <T> boolean subset(set<T> s, set<T> ss);
+    //@ public normal_behavior
+    //@   ensures \result == (s == ss || eq(s, ss));
+    //@ no_state
+  //@ model public static <TT> boolean equals(set<TT> s, set<TT> ss);
     
-    public normal_behavior
-      ensures this.contains(x) ==> \result == this;
-      ensures !this.contains(x) ==> \result.size() == this.size() + 1;
-      ensures \result.contains(x);
-      ensures (\forall T t; t != x; \result.contains(t) == this.contains(t));
-    model heap_free public set<T> add(T x);
+    //@ public normal_behavior
+    //@   ensures \result == (\forall TT t; s.contains(t) ; ss.contains(t)); // FIXME - thinks T is non-static
+    //@ no_state
+  //@ model public static <TT> boolean isSubsetOf(set<TT> s, set<TT> ss);
     
-    public normal_behavior
-      ensures !this.contains(x) ==> \result == this;
-      ensures this.contains(x) ==> \result.size() == this.size() - 1;
-      ensures !\result.contains(x);
-      ensures (\forall T t; t != x; \result.contains(t) == this.contains(t));
-    model heap_free public set<T> remove(T x);
+    //@ public normal_behavior
+    //@   ensures this.contains(x) ==> \result == this;
+    //@   ensures !this.contains(x) ==> \result.size() == this.size() + 1;
+    //@   ensures \result.contains(x);
+    //@   ensures (\forall T t; t != x; \result.contains(t) == this.contains(t));
+    //@ no_state
+  //@ model public set<T> add(T x);
+    
+    //@ public normal_behavior
+    //@   ensures b ==> \result == add(x);
+    //@   ensures !b ==> \result == remove(x);
+    //@ no_state
+    //@ model public set<T> put(T x, boolean b);
+    
+    //@ public normal_behavior
+    //@   ensures !this.contains(x) ==> \result == this;
+    //@   ensures this.contains(x) ==> \result.size() == this.size() - 1;
+    //@   ensures !\result.contains(x);
+    //@   ensures (\forall T t; t != x; \result.contains(t) == this.contains(t));
+    //@ no_state
+  //@ model public set<T> remove(T x);
 
-    public normal_behavior
-      ensures \result[i] == c;
-      ensures \forall T j; j != i; \result[j] == this[j];
-      ensures this[i] == c ==> \result == this;
-      ensures this[i] & !c ==> \result.size() == this.size() - 1;
-      ensures !this[i] & c ==> \result.size() == this.size() + 1;
-    model heap_free public set<T> put(T i, boolean c);
-
-
-@*/
+    // @ public normal_behavior
+    // @   ensures \forall T j; this.contains(j);  p.apply(j) ==> \result.contains(j);
+    // @   ensures \forall T j; \result.contains(j) ==> (this.contains(j) && p.apply(j));
+    //@ no_state
+  //@ model public set<T> filter(java.util.function.Predicate<T> p);
 }

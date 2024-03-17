@@ -1009,7 +1009,7 @@ public final class Arrays {
     //@   ensures \result == (\forall \bigint i; 0 <= i < arr1.length; arr1[i] == arr2[i]);
     //@ model public static spec_pure helper boolean equalArrays(boolean[] arr1, boolean[] arr2);
 
-    // NOTE: These methods+specs do not always trigger well - hence they are not declared heap_free
+    // NOTE: These methods+specs do not always trigger well - hence they are not declared no_state
     //@ public normal_behavior
     //@   requires len >= 0;
     //@   requires 0 <= index1 <= arr1.length - len;

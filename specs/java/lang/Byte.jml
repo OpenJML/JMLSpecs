@@ -303,25 +303,25 @@ public /*@ pure @*/ final class Byte extends Number implements Comparable<Byte>
 
     //@ public normal_behavior
     //@   ensures \result == (x >= 0 ? x: x+256);
-    //@ heap_free helper
+    //@ no_state helper
     public static int toUnsignedInt(byte x);
     
     //@ public normal_behavior
     //@   ensures \result == (x >= 0 ? x: x+256);
-    //@ heap_free helper
+    //@ no_state helper
     public static long toUnsignedLong(byte x);
     
     //@ public normal_behavior
     //@   ensures \result == (hi>=0?hi:hi+256)*256+(lo>=0?lo:lo+256);
-    //@ model public static helper heap_free int toUnsignedInt(byte hi, byte lo);
+    //@ model public static helper no_state int toUnsignedInt(byte hi, byte lo);
 
     //@ public normal_behavior
     //@   requires 0 <= i <= 255;
     //@   ensures \result == (byte)(i<128?i:i-256);
-    //@ model public static heap_free helper byte unsignedCast(int i);
+    //@ model public static no_state helper byte unsignedCast(int i);
 
     //@ public normal_behavior
     //@   requires 0 <= i <= 255;
     //@   ensures (byte)i == (byte)(i<128?i:i-256);
-    //@ model public static heap_free helper void unsignedCastLemma(int i);
+    //@ model public static no_state helper void unsignedCastLemma(int i);
 }

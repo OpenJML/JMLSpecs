@@ -276,11 +276,11 @@ public /*@ pure @*/ final
 
     //@ public normal_behavior
     //@   ensures \result == (b0*256 + Byte.toUnsignedInt(b1));
-    //@ model public static helper heap_free short asShort(byte b0, byte b1);
+    //@ model public static helper no_state short asShort(byte b0, byte b1);
     
     //@ public normal_behavior
     //@   ensures \result == (i < 0 ? 0x10000 + i : i);
-    //@ helper heap_free
+    //@ helper no_state
     public static int toUnsignedInt(short i);
 
     //@ public normal_behavior
@@ -290,7 +290,7 @@ public /*@ pure @*/ final
 
     //@ public normal_behavior
     //@   ensures \result == (i < 0 ? 0x10000 + i : i);
-    //@ helper heap_free
+    //@ helper no_state
     public static long toUnsignedLong(short i);
 
     /*@

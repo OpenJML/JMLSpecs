@@ -382,7 +382,7 @@ public /*@ pure @*/ final
     //@ public normal_behavior
     //@   requires 0 <= i <= 0xffff_ffffL;
     //@   ensures \result == (i <= Integer.MAX_VALUE ? (int)i : (int)(i - Integer.MAX_VALUE - Integer.MAX_VALUE));
-    //@ heap_free helper
+    //@ no_state helper
     //@ model public static int asSignedInt(long i);
     
 }

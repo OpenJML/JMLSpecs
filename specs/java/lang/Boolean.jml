@@ -151,7 +151,7 @@ public final /*@ pure @*/ class Boolean implements java.io.Serializable, Compara
     //@   ensures (b == bb) ==> \result == 0;
     //@   ensures (b && !bb) ==> \result > 0;
     //@   ensures (!b && bb) ==> \result < 0;
-    //@ heap_free
+    //@ no_state
     public static int compare(boolean b, boolean bb);
     
     /*@ public normal_behavior

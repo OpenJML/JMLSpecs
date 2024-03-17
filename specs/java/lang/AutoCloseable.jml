@@ -2,7 +2,7 @@ package java.lang;
 
 public interface AutoCloseable {
     
-    //@ model instance public JMLDataGroup autocloseableContent;
+    //@ model public instance \datagroup autocloseableContent;
     
     //@ public behavior
     //@   assignable \everything;

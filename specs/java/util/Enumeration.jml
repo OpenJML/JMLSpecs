@@ -23,8 +23,6 @@
 
 package java.util;
 
-//@ model import org.jmlspecs.lang.JMLDataGroup;
-
 /** JML's specification of java.util.Enumeration.
  * Some of this specification is taken from ESC/Java.
  * @version $Revision: 1388 $

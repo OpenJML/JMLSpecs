@@ -3,7 +3,7 @@ import java.util.function.*;
 
 public interface Collector<T, A, R> {
     
-  //@ model public instance JMLDataGroup content;
+  //@ model public instance \datagroup content;
     
   public abstract Supplier<A> supplier();
   public abstract BiConsumer<A, T> accumulator();

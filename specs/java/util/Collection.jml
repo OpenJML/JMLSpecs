@@ -34,7 +34,7 @@ package java.util;
 //@ non_null_by_default
 public interface Collection<E> extends Iterable<E> {
 
-    //-RAC@ model public instance JMLDataGroup localState; in objectState;
+    //-RAC@ model public instance \datagroup localState; in objectState;
 
     /** A utility method that compares possibly-null objects,
         according to how the Collection classes do the comparison. 

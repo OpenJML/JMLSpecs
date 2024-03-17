@@ -2,113 +2,130 @@ package org.jmlspecs.lang;
 
 //@ immutable pure 
 public class seq<T> implements IJmlPrimitiveType, IJmlIntArrayLike {
- /*@   
-    axiom \forall seq<T> s, ss;; s == ss <==> (s.size == ss.size && \forall int i; 0<=i<s.size; s[i] == ss[i]);
+   
+    //@ axiom \forall seq<T> s, ss;; s == ss <==> (s.size == ss.size && \forall int i; 0<=i<s.size; s[i] == ss[i]);
 
-    ghost public \bigint size;
-    public invariant size >= 0;
+    //@ ghost public \bigint size;
+    //@ public invariant size >= 0;
     
-    public normal_behavior
-      ensures \result == size;
-    model heap_free public \bigint size();
+    //@ public normal_behavior
+    //@   ensures \result == size;
+    //@ no_state
+    public long size();  // FIXME - change long to \bigint eventually
     
-    public normal_behavior
-      ensures \result == size;
-    model heap_free public \bigint length();
+    //@ public normal_behavior
+    //@   ensures \result == size;
+    //@ no_state 
+    public long length();
     
-    public normal_behavior
-      ensures \result == this[i];
-    model heap_free public T get(\bigint i);
+    //@ public normal_behavior
+    //-RAC@  ensures \result == this[i];
+    //@ no_state
+    public T get(long i);
 
-    public normal_behavior
-      ensures \result == (size == 0);
-    model heap_free public boolean isEmpty();
+    //@ public normal_behavior
+    //@   ensures \result == (size == 0);
+    //@ no_state
+    public boolean isEmpty();
     
-    public normal_behavior
-      ensures \result.size == 0;
-    model heap_free static public <T> seq<T> empty();
+    //@ public normal_behavior
+    //@   ensures \result.size == 0;
+    //@ no_state
+    static public <T> seq<T> empty();
     
-    public normal_behavior
-      ensures \result.size == 1;
-      ensures \result[0] == t;
-    model heap_free static public <T> seq<T> of(T t);
+    //@ public normal_behavior
+    //@   ensures \result.size == 1;
+    //@  ensures \result[0] == t;
+    //@ no_state
+    static public <T> seq<T> of(T t);
     
-    public normal_behavior
-      ensures \result.size == t.length;
-      ensures \forall int i; 0<=i<t.length; \result[i] == t[i];
-    model heap_free  @SuppressWarnings("unchecked")
+    //@ public normal_behavior
+    //@   ensures \result.size == t.length;
+    //@   ensures \forall int i; 0<=i<t.length; \result[i] == t[i];
+    //@ no_state
+    @SuppressWarnings("unchecked")
     static public <T> seq<T> of(T ... t);
     
-    public normal_behavior
-       ensures \result == (s.size == ss.size && (\forall \bigint i;; (0 <= i < s.size) ==> (s[i] == ss[i]) ));
-    model heap_free public static <T> boolean equals(seq<T> s, seq<T> ss);
+    //@ public normal_behavior
+    //@   ensures \result == (s.size == ss.size && (\forall \bigint i;; (0 <= i < s.size) ==> (s[i] == ss[i]) ));
+    //@ no_state
+    public static <T> boolean equals(seq<T> s, seq<T> ss);
     
-    public normal_behavior
-       ensures \result == (\exists \bigint i; 0 <= i < this.size; this[i] == v);
-       ensures \result == (size == 0 ? false : (this[0] == v && this.tail(1).contains(v)));
-    model heap_free public <T> boolean contains(T v);
+    //@ public normal_behavior
+    //@   ensures \result == (\exists \bigint i; 0 <= i < this.size; this[i] == v);
+    //@   ensures \result == (size == 0 ? false : (this[0] == v && this.tail(1).contains(v)));
+    //@ no_state
+    public <T> boolean contains(T v);
     
-    public normal_behavior
-       ensures \result == (this == s || equals(this,s));
-    model heap_free public boolean equals(seq<T> s);
+    //@ public normal_behavior
+    //@   ensures \result == (this == s || equals(this,s));
+    //@ no_state
+    public boolean eq(seq<T> s);
     
-    public normal_behavior
-      requires 0 <= j <= this.size;
-      ensures \result.size == 1 + this.size;
-      ensures (\forall \bigint i;; (0 <= i < j) ==> (\result[i] == this[i]));
-      ensures (\forall \bigint i;; (j < i <= this.size) ==> (\result[i] == this[i-1]));
-      ensures \result[j] == v;
-    model heap_free public seq<T> add(\bigint j, T v);
+    //@ public normal_behavior
+    //@   requires 0 <= j <= this.size;
+    //@   ensures \result.size == 1 + this.size;
+    //@   ensures (\forall \bigint i;; (0 <= i < j) ==> (\result[i] == this[i]));
+    //@   ensures (\forall \bigint i;; (j < i <= this.size) ==> (\result[i] == this[i-1]));
+    //@   ensures \result[j] == v;
+    //@ no_state
+    public seq<T> insert(long j, T v);
 
-    public normal_behavior
-      ensures \result.size == 1 + this.size; // FIXME - needed to prove valuetypes Seq.addBumpsSize, but why?
-      ensures \result == add(size,v);
-    model heap_free public seq<T> add(T v);
+    //@ public normal_behavior
+    //@  ensures \result.size == 1 + this.size; // FIXME - needed to prove valuetypes Seq.addBumpsSize, but why?
+    //@  ensures (\forall \bigint i; 0 <= i < this.size; \result[i] == this[i]);
+    //@  ensures \result[\result.size-1] == v;
+    //@ no_state
+    public seq<T> add(T v);
 
-    public normal_behavior
-      ensures \result.size == this.size + s.size;
-      ensures (\forall \bigint i;; (0 <= i < this.size) ==> (\result[i] == this[i]));
-      ensures (\forall \bigint i;; (this.size <= i && i < \result.size) ==> (\result[i] == this[i-this.size]));
-    model heap_free public seq<T> append(seq<T> s);
+    //@ public normal_behavior
+    //@   ensures \result.size == this.size + s.size;
+    //@   ensures (\forall \bigint i;; (0 <= i < this.size) ==> (\result[i] == this[i]));
+    //@   ensures (\forall \bigint i;; (this.size <= i && i < \result.size) ==> (\result[i] == this[i-this.size]));
+    //@ no_state
+    public seq<T> append(seq<T> s);
 
-    public normal_behavior
-      ensures \result.size == this.size + 1;
-      ensures (\forall \bigint i;; (0 <= i < this.size) ==> (\result[i+1] == this[i]));
-      ensures \result[0] == t;
-    model heap_free public seq<T> prepend(T t);
+    //@ public normal_behavior
+    //@   ensures \result.size == this.size + 1;
+    //@   ensures (\forall \bigint i;; (0 <= i < this.size) ==> (\result[i+1] == this[i]));
+    //@   ensures \result[0] == t;
+    //@ no_state
+    public seq<T> prepend(T t);
 
-    public normal_behavior
-      requires 0 <= j && j < this.size;
-      ensures \result.size() == this.size - 1;
-      ensures \forall \bigint i; 0 <= i < j; \result[i] == this[i];
-      ensures \forall \bigint i; j <= i < \result.size; \result[i] == this[i+1];
-    model heap_free public seq<T> remove(\bigint j);
+    //@ public normal_behavior
+    //@   requires 0 <= j && j < this.size;
+    //@   ensures \result.size() == this.size - 1;
+    //@   ensures \forall \bigint i; 0 <= i < j; \result[i] == this[i];
+    //@   ensures \forall \bigint i; j <= i < \result.size; \result[i] == this[i+1];
+    //@ no_state
+    public seq<T> remove(long j);
 
-    public normal_behavior
-        ensures \result.size == this.size;
-        ensures \result[i] == c;
-        ensures \forall \bigint j; j != i; \result[j] == this[j];
-        ensures this[i] == c ==> \result == this;
-    model heap_free public seq<T> put(\bigint i, T c);
+    //@ public normal_behavior
+    //@   ensures \result.size == this.size;
+    //@   ensures \result[i] == c;
+    //@   ensures \forall \bigint j; j != i; \result[j] == this[j];
+    //@   ensures this[i] == c ==> \result == this;
+    //@ no_state
+    public seq<T> put(long i, T c);
 
-    public normal_behavior
-        ensures \result.size == j-i;
-        ensures \forall \bigint k; 0<=k<j-i; \result[k] == this[k+i];
-    model heap_free public seq<T> sub(\bigint i, \bigint j);
+    //@ public normal_behavior
+    //@   ensures \result.size == j-i;
+    //@   ensures \forall \bigint k; 0<=k<j-i; \result[k] == this[k+i];
+    //@ no_state
+    public seq<T> sub(long i, long j);
 
-    public normal_behavior
-        ensures i == 0 ==> \result == this;
-        ensures \result.size == (0 <= i <= size ? i : size < i ? size : 0);
-        ensures \forall \bigint k; 0<=k<\result.size; \result[k] == this[k];
-    model heap_free public seq<T> head(\bigint i);
+    //@ public normal_behavior
+    //@   ensures i == 0 ==> \result == this;
+    //@   ensures \result.size == (0 <= i <= size ? i : size < i ? size : 0);
+    //@   ensures \forall \bigint k; 0<=k<\result.size; \result[k] == this[k];
+    //@ no_state
+    public seq<T> head(long i);
 
-    public normal_behavior
-        requires 0 <= i <= this.size;
-        ensures i == 0 ==> \result == this;
-        ensures \result.size == this.size - i;
-        ensures \forall \bigint k; 0<=k<\result.size; \result[k] == this[k+i];
-    model heap_free public seq<T> tail(\bigint i);
-
-
-    @*/
+    //@ public normal_behavior
+    //@   requires 0 <= i <= this.size;
+    //@   ensures i == 0 ==> \result == this;
+    //@   ensures \result.size == this.size - i;
+    //@   ensures \forall \bigint k; 0<=k<\result.size; \result[k] == this[k+i];
+    //@ no_state
+    public seq<T> tail(long i);
 }

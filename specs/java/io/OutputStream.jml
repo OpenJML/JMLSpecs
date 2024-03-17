@@ -34,7 +34,7 @@ public abstract class OutputStream extends Object implements Closeable, Flushabl
     /** The output data group is used to specify things like caching,
      * and to make sure that methods that might produce some output
      * have a side effect on some datagroup. */
-    //-RAC@ public model JMLDataGroup output; in objectState;
+    //-RAC@ model public \datagroup output; in objectState;
 
     /** The bytes that are to be (or have been) output. */
     //-RAC@ public model byte non_null [] outputBytes; in output; // FIXME - fix position of non_null

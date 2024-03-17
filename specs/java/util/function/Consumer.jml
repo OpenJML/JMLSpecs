@@ -1,7 +1,7 @@
 package java.util.function;
 
 public interface Consumer<T> {
-    //@ model public instance JMLDataGroup consumerState; //@ in objectState;
+    //@ model public instance \datagroup consumerState; //@ in objectState;
 
     //@ public behavior
     //@   requires t != null;

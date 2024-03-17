@@ -375,7 +375,7 @@ public /*@ pure @*/ class BigInteger extends Number implements Comparable<BigInt
 
     //@ public normal_behavior
     //@   requires certainty > 0;
-    //@ heap_free
+    //@ no_state
     //@ model public static boolean isProbablePrime(\bigint v, int certainty);
 
     // Comparison Operations
@@ -429,7 +429,7 @@ public /*@ pure @*/ class BigInteger extends Number implements Comparable<BigInt
     
     //@ public normal_behavior
     //@   ensures \result == (n <= 0 ? 1 : 256 * pow256(n-1));
-    //@ model public static heap_free helper \bigint pow256(\bigint n);
+    //@ model public static no_state helper \bigint pow256(\bigint n);
     
     // @ axiom (\forall \bigint n; n >= 0 ==> pow256(n+1) > pow256(n)); // FIXME - this axiom causes infeasibility (cf. gitbug578)
     // @ axiom (\forall \bigint m, n; m > n && n >= 0; pow256(m) > pow256(n)); // FIXME - this axiom causes infeasibility (cf. gitbug578)
