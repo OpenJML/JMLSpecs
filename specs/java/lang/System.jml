@@ -145,7 +145,7 @@ public final class System {
     public static native long currentTimeMillis();
 
     // FIXME - exceptional cases
-    /*@  public exceptional_behavior
+    /* @  public exceptional_behavior // FIXME - bigint problem
       @    requires src == null || dest == null;
       @    reads \nothing;
       @    assignable \nothing;
@@ -202,7 +202,7 @@ t *);
       @   signals_only ArrayStoreException;
       @ also
       */
-    /*@   public normal_behavior
+    /*@   public normal_behavior // FIXME - temp bigint problem
     @    requires !(    srcPos < 0 || destPos < 0 || length_ < 0 );
       {|
         requires (src instanceof Object[]) &&
@@ -239,7 +239,7 @@ t *);
     @      ensures java.util.Arrays.equalArrays(da,destPos,sa,srcPos,length_);
     @   |}
        also
-        requires (src instanceof char[]) &&
+    @    requires (src instanceof char[]) &&
                  (dest instanceof char[]) &&
     @                 srcPos + length_ <= ((char[])src).length
     @                && destPos + length_ <= ((char[])dest).length;

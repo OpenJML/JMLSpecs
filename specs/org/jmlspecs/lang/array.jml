@@ -14,12 +14,12 @@ public class array<T> implements IJmlPrimitiveType, IJmlIntArrayLike {
     public normal_behavior
         ensures \result.length == a.length;
         ensures (\forall int i; 0 <= i < a.length; \result.get(i) == a[i]);
-    model public static <T,U> array<T> ofx(U[] a);  // U must be assignable to T
+    model public static array<Integer> of(int[] a);
     
     public normal_behavior
         ensures \result.length == a.length;
         ensures (\forall int i; 0 <= i < a.length; \result.get(i) == a[i]);
-    model public static array<Integer> of(int[] a);
+    model public static <T,U> array<T> ofx(U[] a);  // U must be assignable to T
     
     public normal_behavior
         ensures \result == this[i];

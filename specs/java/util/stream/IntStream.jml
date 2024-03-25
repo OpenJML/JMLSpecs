@@ -2,7 +2,7 @@ package java.util.stream;
 import java.util.function.*;
 //@ non_null_by_default
 public interface IntStream extends BaseStream<Integer,IntStream> {
-    //  @ model public final instance array<Integer> intvalues;
+    //  @ model public final instance \seq<Integer> intvalues;
 
       public abstract IntStream filter(java.util.function.IntPredicate pred);
       public abstract IntStream map(java.util.function.IntUnaryOperator op);
@@ -64,7 +64,7 @@ public interface IntStream extends BaseStream<Integer,IntStream> {
       public static IntStream of(int i);
       //@ public normal_behavior
       //@   ensures \result.values.length == ints.length;
-      //@   ensures array.equals(\result.values,array.<Integer>of(ints));
+      // @   ensures array.equals(\result.values,array.<Integer>of(ints)); // FIXME
       //@ pure helper
       public static IntStream of(int... ints);
       public static IntStream iterate(int i, java.util.function.IntUnaryOperator op);

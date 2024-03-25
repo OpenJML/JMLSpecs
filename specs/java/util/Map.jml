@@ -90,11 +90,11 @@ public interface Map<K,V> {
           @*/
     }
 
-    //-RAC@ model public instance intmap<V> modelMap; in objectState;
-    //-RAC@ model public instance intset keys; in objectState;
+    //-RAC@ model public instance \intmap<V> modelMap; in objectState;
+    //-RAC@ model public instance \intset keys; in objectState;
     //-RAC@ model public instance V nullValue;
     //-RAC@ model public instance boolean nullPresent;
-    //-RAC@ model public instance \bigint _size; in objectState;
+    //-RAC@ model public instance int _size; in objectState; // FIXME - change to \bigint
     //-RAC@ public represents _size = size();
 
     //@ public normal_behavior
@@ -110,7 +110,7 @@ public interface Map<K,V> {
     
     /*-RAC@ public behavior
       @    ensures _size==0 ==> !\result;
-      @    ensures keys[key.uniqueHash] <==> \result;
+      @    // ensures keys[key.uniqueHash] <==> \result;
       @
       @    signals_only ClassCastException, NullPointerException;
       @    signals (ClassCastException)
@@ -121,8 +121,8 @@ public interface Map<K,V> {
     /*@ pure @*/ boolean containsKey(/*@nullable*/ Object key) throws RuntimeException;
 
     /*-RAC@ public behavior
-      @    ensures isEmpty() ==> !\result;
-      @    ensures \result <==> ((nullPresent && nullValue.uniqueHash == value.uniqueHash) || \exists \bigint i;; keys[i] && modelMap[i].uniqueHash == value.uniqueHash);
+      @    ensures isEmpty() ==> !\result; // FIXME quantifier to \bigint eventually
+      @    ensures \result <==> ((nullPresent && nullValue.uniqueHash == value.uniqueHash) || \exists int i;; keys[i] && modelMap[i].uniqueHash == value.uniqueHash);
       @
       @    signals_only ClassCastException, NullPointerException;
       @    signals (ClassCastException)

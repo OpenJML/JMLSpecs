@@ -115,14 +115,14 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
     //@ public normal_behavior
     //@   ensures \result != null;
     //@   ensures \result.length == values.length;
-    //@   ensures array.equals(array.<Object>of(\result),values);
+    // @   ensures array.equals(array.<Object>of(\result),values); // FIXME
     //@ pure
     Object[] toArray();
     
     //@ public normal_behavior
     //@   ensures \result != null;
     //@   ensures \result.length == values.length;
-    //@   ensures array.equals(array.<A>of(\result),values); 
+    // @   ensures array.equals(array.<A>of(\result),values); // FIXME
     //@ pure
     <A> A[] toArray(IntFunction<A[]> generator);
 
@@ -144,8 +144,8 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
     // -RAC@   requires collector != null;
     // -RAC@   requires collector == Collectors.toList();
     // -RAC@   assignable collector.content;
-    //-RAC@   ensures \result instanceof java.util.List ==> ((java.util.List)\result).values == this.values; 
-    //-RAC@   ensures \result instanceof java.util.Set ==> ((java.util.Set)\result).values == this.values; 
+    // -RAC@   ensures \result instanceof java.util.List ==> ((java.util.List)\result).values == this.values; 
+    // -RAC@   ensures \result instanceof java.util.Set ==> ((java.util.Set)\result).values == this.values; 
     <R, A> R collect(Collector<? super T, A, R> collector);
     
     java.util.Optional<T> min(java.util.Comparator<? super T> comparator);

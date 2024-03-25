@@ -1154,6 +1154,17 @@ public final class Arrays {
     //@   ensures \result == (\forall int i; 0 <= i < arr1.length; arr1[i] == arr2[i]);
     //@ model public static spec_pure helper boolean equalArrays(double[] arr1, double[] arr2);
 
+    // FIXME - temporary
+    //@ public normal_behavior
+    //@   requires len >= 0;
+    //@   requires 0 <= index1 <= arr1.length - len;
+    //@   requires 0 <= index2 <= arr2.length - len;
+    //@// All of these ensures are included because solvers have a hard time with index arithmetic
+    //@   ensures \result == (\forall \bigint i; index1 <= i < index1 + len; arr1[i] == arr2[i-index1+index2]);
+    //@   ensures \result == (\forall \bigint i; index2 <= i < index2 + len; arr2[i] == arr1[i-index2+index1]);
+    //@   ensures \result == (\forall \bigint i; 0 <= i < len; arr1[i+index1] == arr2[i+index2]);
+    //@ model public static spec_pure helper boolean equalArrays(Object[] arr1, int index1, Object[] arr2, int index2, int len);
+
     //@ public normal_behavior
     //@   requires len >= 0;
     //@   requires 0 <= index1 <= arr1.length - len;
@@ -2014,14 +2025,14 @@ public final class Arrays {
 //    public static java.util.Spliterator$OfDouble spliterator(double[], int, int);
     
     //@ public normal_behavior
-    //@   ensures array.equals(\result.values,array.<T>of(arr));
+    //@   ensures \seq.equals(\result.values,\seq.<T>of(arr));
     //@ pure
     public static <T> java.util.stream.Stream<T> stream(T[] arr);
 
 //    public static <T> java.util.stream.Stream<T> stream(T[], int, int);
 
     //@ public normal_behavior
-    //@   ensures array.equals(\result.values,array.<Integer>of(arr));
+    //@   ensures \seq.<Integer>equals(\result.values,\seq.of(arr));
     //@ pure
     public static java.util.stream.IntStream stream(int[] arr);
 //    public static java.util.stream.IntStream stream(int[], int, int);

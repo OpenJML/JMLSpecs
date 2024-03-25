@@ -6,21 +6,21 @@ public class intmap<V> implements IJmlPrimitiveType, IJmlIntArrayLike {
 
     public normal_behavior
       ensures \result == this[k];
-    model no_state public nullable V get(\bigint k);
+    model no_state public nullable V get(int k); // FIXME int to \bigint
 
     public normal_behavior
-      ensures \result == (\forall \bigint k;; s[k] == ss[k]);
-    model no_state public static <V> boolean equals(intmap<V> s, intmap<V> ss);
+      ensures \result == (\forall int k;; s[k] == ss[k]); // FIXME int to \bigint
+    model no_state public static <V> boolean equals(\intmap<V> s, \intmap<V> ss);
     
     public normal_behavior
       ensures \result == (this == s || equals(this,s));
-    model no_state public boolean equals(intmap<V> s);
+    model no_state public boolean equals(\intmap<V> s);
     
     public normal_behavior
       ensures \result[k] == v;
       ensures (\forall \bigint kk;; k != kk ==> (\result[kk] == this[kk]));
       ensures this[k] == v ==> \result == this;
-    model no_state public intmap<V> put(\bigint k, nullable V v);
+    model no_state public \intmap<V> put(int k, nullable V v); // FIXME int to \bigint
 @*/
 }
 
