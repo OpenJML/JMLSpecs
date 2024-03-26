@@ -28,7 +28,7 @@ import org.jmlspecs.annotation.*;
  * @version $Revision: 1.4 $
  * @author Gary T. Leavens, based on an idea of Rustan Leino
  */
-public /*@ spec_pure */ final class datagroup {
+public /*@ spec_pure */ final class datagroup implements IJmlPrimitiveType {
 
     /** No objects of this type may be created
      */

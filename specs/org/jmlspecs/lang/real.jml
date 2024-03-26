@@ -1,6 +1,6 @@
 package org.jmlspecs.lang;
 
-public class real  implements IJmlPrimitiveType {
+public class real implements IJmlPrimitiveType {
     
     
     
