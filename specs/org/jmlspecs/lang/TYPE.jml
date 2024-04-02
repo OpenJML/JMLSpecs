@@ -9,7 +9,7 @@ public class TYPE {
     //@   ensures \result.head == h;
     //@   ensures \result.typeargs == args; // FIXME - no aliasing?
     //@ no_state
-    //@ model public static TYPE make(Class<?> h, List<TYPE> args);
+    //@ model public static TYPE of(Class<?> h, List<TYPE> args);
     
     //@ public normal_behavior
     //@   ensures \result == head;

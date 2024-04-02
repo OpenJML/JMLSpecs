@@ -76,10 +76,10 @@ public class LinkedList<E> extends AbstractSequentialList<E>
     public E removeLast();
   
     // inherited spec
-    public void addFirst(E o);
+    public void addFirst(/*@ nullable */ E o);
 
     // inherited spec
-    public void addLast(E o);
+    public void addLast(/*@ nullable */ E o);
     
     // -- all other methods are specified by List --
     //@ pure
@@ -88,7 +88,7 @@ public class LinkedList<E> extends AbstractSequentialList<E>
     //@ pure
     public int size();
     
-    public boolean add(E o);
+    public boolean add(/*@ nullable */ E o);
 
     public boolean remove(Object o);
     

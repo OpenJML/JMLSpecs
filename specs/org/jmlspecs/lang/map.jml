@@ -4,9 +4,9 @@ package org.jmlspecs.lang;
 public class map<K,V> implements IJmlPrimitiveType, IJmlArrayLike {
 /*@    
 
-    public normal_behavior
-      ensures (\forall K k; ; \result[k] == null);
-    model no_state public static <K,V> map<K,V> empty();
+//    public normal_behavior
+//      ensures (\forall K k; ; \result[k] == null);
+//    model no_state public static <K,V> map<K,V> empty();
     
     public normal_behavior
       ensures \result == this[k];

@@ -55,7 +55,7 @@ public /*@ pure @*/ class BigInteger extends Number implements Comparable<BigInt
         //@ pure helper
         public static model \bigint convert(byte non_null [] val) {
         // !FIXME! - should put in a non-circular computation for RAC
-            return new BigInteger(val);
+            return \bigint.of(new BigInteger(val));
         }
     @*/
 

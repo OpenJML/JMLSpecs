@@ -18,30 +18,30 @@ public class Utils {
     //@    ensures \result.size() == 0;
     static public /*@non_null pure*/ <E> org.jmlspecs.lang.JMLList<E> defaultEmpty();
     
-    //@ public normal_behavior
-    //@   requires (\forall int i; 0<=i && i<args.length; args[i] != null);
-    //q@   ensures JML.erasure((\TYPE)\result) == base;
-    //-RAC@   ensures JML.typeargs((\TYPE)\result).length == args.length;
-    //-RAC@   ensures (\forall int i; 0<=i && i<args.length; JML.typeargs((\TYPE)\result)[i] == (\TYPE)args[i]);
-    static public @NonNull IJMLTYPE makeTYPE(@NonNull Class<?> base, @NonNull IJMLTYPE ... args);
-
-    //@ public normal_behavior
-    //@   ensures \result.erasure() == base;
-    //-RAC@   ensures  JML.typeargs((\TYPE)\result).length == 0;
-    static public @NonNull IJMLTYPE makeTYPE0(@NonNull Class<?> base);
-
-    //@ public normal_behavior
-    //-RAC@   ensures JML.erasure((\TYPE)\result) == base;
-    //-RAC@   ensures JML.typeargs((\TYPE)\result).length == 1;
-    //-RAC@   ensures JML.typeargs((\TYPE)\result)[0] == (\TYPE)a0;
-    public static @NonNull IJMLTYPE makeTYPE1(@NonNull Class<?> base, @NonNull IJMLTYPE a0);
-    
-    //@ public normal_behavior
-    //@   ensures JML.erasure((\TYPE)\result) == base;
-    //@   ensures JML.typeargs((\TYPE)\result).length == 2;
-    //@   ensures JML.typeargs((\TYPE)\result)[0] == (\TYPE)a0;
-    //@   ensures JML.typeargs((\TYPE)\result)[1] == (\TYPE)a1;
-    public static @NonNull IJMLTYPE makeTYPE2(@NonNull Class<?> base, @NonNull IJMLTYPE a0, @NonNull IJMLTYPE a1);
+//    //@ public normal_behavior
+//    //@   requires (\forall int i; 0<=i && i<args.length; args[i] != null);
+//    //q@   ensures JML.erasure((\TYPE)\result) == base;
+//    //-RAC@   ensures JML.typeargs((\TYPE)\result).length == args.length;
+//    //-RAC@   ensures (\forall int i; 0<=i && i<args.length; JML.typeargs((\TYPE)\result)[i] == (\TYPE)args[i]);
+//    static public @NonNull IJMLTYPE makeTYPE(@NonNull Class<?> base, @NonNull IJMLTYPE ... args);
+//
+//    //@ public normal_behavior
+//    //@   ensures \result.erasure() == base;
+//    //-RAC@   ensures  JML.typeargs((\TYPE)\result).length == 0;
+//    static public @NonNull IJMLTYPE makeTYPE0(@NonNull Class<?> base);
+//
+//    //@ public normal_behavior
+//    //-RAC@   ensures JML.erasure((\TYPE)\result) == base;
+//    //-RAC@   ensures JML.typeargs((\TYPE)\result).length == 1;
+//    //-RAC@   ensures JML.typeargs((\TYPE)\result)[0] == (\TYPE)a0;
+//    public static @NonNull IJMLTYPE makeTYPE1(@NonNull Class<?> base, @NonNull IJMLTYPE a0);
+//    
+//    //@ public normal_behavior
+//    //@   ensures JML.erasure((\TYPE)\result) == base;
+//    //@   ensures JML.typeargs((\TYPE)\result).length == 2;
+//    //@   ensures JML.typeargs((\TYPE)\result)[0] == (\TYPE)a0;
+//    //@   ensures JML.typeargs((\TYPE)\result)[1] == (\TYPE)a1;
+//    public static @NonNull IJMLTYPE makeTYPE2(@NonNull Class<?> base, @NonNull IJMLTYPE a0, @NonNull IJMLTYPE a1);
 
     // FIXME @ axiom (\forall \TYPE t,tt; (t != null && tt != null && t <: tt) ==> t.erasure() <: tt.erasure());
 

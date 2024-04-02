@@ -2,7 +2,7 @@ package org.jmlspecs.lang;
 
 //@ immutable no_state
 public class array<T> implements IJmlPrimitiveType, IJmlIntArrayLike {
- /*@   
+ /* @   
     model public \bigint length;
     public invariant length >= 0;
     

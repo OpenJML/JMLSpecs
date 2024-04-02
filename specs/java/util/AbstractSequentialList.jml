@@ -22,7 +22,7 @@ public abstract class AbstractSequentialList<E> extends java.util.AbstractList<E
     public E remove(int index);
 
     // specs inherited from List
-    public void add(int index, E value);
+    public void add(int index, /*@ nullable */ E value);
 
     // specs inherited from List
     public boolean addAll(int index, java.util.Collection<? extends E> values);

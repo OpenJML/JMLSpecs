@@ -116,7 +116,7 @@ public interface List<E> extends SequencedCollection<E> {
       @   ensures values.contains(o);
       @*/
     /*+RAC@ also public behavior requires true; */
-    boolean add(E o);
+    boolean add(/*@ nullable */ E o);
 
 
     /*-RAC@
@@ -264,7 +264,7 @@ public interface List<E> extends SequencedCollection<E> {
       @ 
       @*/
     /*+RAC@ public behavior requires true; */
-    void add(int index, E element);
+    void add(int index, /*@ nullable */ E element);
 
     /*-RAC@ public behavior
       @   requires  0 <= index && index < size();

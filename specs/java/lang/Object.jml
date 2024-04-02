@@ -48,7 +48,7 @@ public class Object {
 
     /** A (model) value unique to the equivalence class defined by equals().
      *  Regular hashCode() might have conflicts. */
-    //@ model public int uniqueHash; in objectState; // FIXME - change to \bigint
+    //@ model public \bigint uniqueHash; in objectState;
 
     /*@ public normal_behavior
       @   assignable \nothing;

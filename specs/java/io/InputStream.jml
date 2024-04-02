@@ -58,7 +58,7 @@ public abstract class InputStream implements Closeable {
 
     //@ requires a != null && b != null;
     //@ requires a.length >= length && b.length >= length;
-    //@ ensures (\forall int i; 0<=i && i < (int)length; a[i] == b[i]); // FIXME - when arithmetic modes are supported, we can allow indices in JML annotations to be \bigint
+    //@ ensures (\forall int i; 0<=i && i < length; a[i] == b[i]);
     //@ public static model boolean equalBytes(byte[] a, byte[] b, \bigint length);
 
     /*-RAC@ public normal_behavior

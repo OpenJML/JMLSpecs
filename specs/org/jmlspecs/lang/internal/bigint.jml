@@ -1,0 +1,101 @@
+package org.jmlspecs.lang.internal;
+
+import org.jmlspecs.lang.IJmlPrimitiveType;
+
+//@ no_state
+public class bigint implements IJmlPrimitiveType {
+    
+    public static final bigint zero;
+    
+    //@ static public final invariant zero == (\bigint)0;
+
+    //@ public normal_behavior
+    //@  ensures zero == (\bigint)0;
+    //@ static_initializer
+    
+    //@ helper
+    public static bigint of(java.math.BigInteger i);
+    
+    //@ helper
+    public static bigint of(long i);
+    
+    //@ helper
+    public bigint negate();
+    
+    //@ helper
+    public bigint add(bigint v);
+    
+    //@ helper
+    public bigint subtract(bigint v);
+    
+    //@ helper
+    public bigint multiply(bigint v);
+    
+    //@ helper
+    public bigint divide(bigint v);
+    
+    //@ helper
+    public bigint mod(bigint v);
+    
+    //@ helper
+    public boolean eq(bigint v);
+    
+    //@ helper
+    public boolean ne(bigint v);
+    
+    //@ helper
+    public boolean lt(bigint v);
+    
+    //@ helper
+    public boolean le(bigint v);
+    
+    //@ helper
+    public boolean gt(bigint v);
+    
+    //@ helper
+    public boolean ge(bigint v);
+    
+    //@ helper
+    public bigint and(bigint v);
+    
+    //@ helper
+    public bigint or(bigint v);
+    
+    //@ helper
+    public bigint xor(bigint v);
+    
+    //@ helper
+    public bigint comp();
+    
+    // A negative shift is a positive shift in the other direction, at least in RAC
+    //@ helper
+    public bigint shiftLeft(bigint v);
+    
+    //@ helper
+    public bigint shiftRight(bigint v);
+    
+    //@ helper pure
+    public String toString();
+    
+    //@ helper
+    public java.math.BigInteger bigValue();
+    
+    //@ helper
+    public long longValue();
+
+    //@ helper
+    public int intValue();
+
+    //@ helper
+    public short shortValue();
+
+    //@ helper
+    public byte byteValue();
+
+    //@ helper
+    public char charValue();
+
+    //@ helper
+    public org.jmlspecs.lang.real realValue();
+
+}

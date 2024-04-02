@@ -51,7 +51,7 @@ public interface Queue<E> extends Collection<E> {
       @ public exceptional_behavior
       @   requires isEmpty();
       @*/
-    public /*@ pure nullable @*/ E element() throws NoSuchElementException;
+    public /*@ spec_pure nullable @*/ E element() throws NoSuchElementException;
 
     /*-RAC@ public behavior
       @   requires  false && (* capacity restrictions respected *);

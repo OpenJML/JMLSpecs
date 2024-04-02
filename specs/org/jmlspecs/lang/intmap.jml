@@ -1,8 +1,9 @@
 package org.jmlspecs.lang;
 
+/** value-based map from \bigint to V */
 //@ immutable pure non_null_by_default
 public class intmap<V> implements IJmlPrimitiveType, IJmlIntArrayLike {
-/*@    
+/* @    
 
     public normal_behavior
       ensures \result == this[k];

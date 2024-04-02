@@ -2,7 +2,7 @@ package org.jmlspecs.lang;
 
 //@ immutable no_state
 public class intset implements IJmlPrimitiveType, IJmlIntArrayLike {
-/*@    
+/* @    
     public normal_behavior
       ensures \result >= 0;
     model no_state public \bigint size();
