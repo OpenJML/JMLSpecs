@@ -77,7 +77,7 @@ public abstract class AbstractQueue<E> extends AbstractCollection<E>
 
     // //@ requires theSize != 0;
     // //@ ensures \result == \old(ic.get(0));
-    public /*@ pure @*/ E element();
+    public /*@ spec_pure @*/ E element();
 
     // //@ requires theSize != 0;
     // //@ assignable contents;
