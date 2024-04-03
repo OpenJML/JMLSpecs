@@ -1,5 +1,8 @@
 package org.jmlspecs.lang;
 
+import org.jmlspecs.lang.internal.*;
+
+
 //@ immutable no_state non_null_by_default
 public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
 
@@ -37,12 +40,12 @@ public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
     //-RAC@ public normal_behavior
     //-RAC@   ensures \result == length;
     //@ no_state 
-    public long size();
+    public bigint size();
     
     //-RAC@ public normal_behavior
     //-RAC@   ensures \result == this[i];
     //@ no_state
-    public char get(int i);  // FIXME _ change argument to bigint eventually
+    public char get(bigint i);  // FIXME _ change argument to bigint eventually
 
     //-RAC@ public normal_behavior
     //-RAC@   ensures \result.length == s.length + ss.length;
@@ -58,7 +61,7 @@ public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
     //-RAC@ ensures \forall \bigint j; j != i; \result[j] == this[j];
     //-RAC@     ensures this[i] == c ==> \result == this;
     //@ no_state 
-    public string put(int i, char c);
+    public string put(bigint i, char c);
  
     //-RAC@ public normal_behavior
     //-RAC@ ensures \result == (s.length == ss.length && (\forall \bigint i; 0 <= i < s.length; s[i] == ss[i] ));
@@ -81,7 +84,7 @@ public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
     //-RAC@ ensures (\forall \bigint i;; (j+1 <= i < \result.length) ==> (\result[i] == this[i-1]));
     //-RAC@   ensures \result[j] == v;
     //@ no_state 
-    public string insert(int j, char v);// FIXME _ change int to bigint eventually
+    public string insert(bigint j, char v);// FIXME _ change int to bigint eventually
 
     //@ public normal_behavior
     //@   ensures \result.length == this.length + 1;
@@ -110,7 +113,7 @@ public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
     //-RAC@   ensures \result.length == end - start;
     //-RAC@   ensures (\forall \bigint i;; (0 <= i < \result.length) ==> \result[i] == this[i+start]);
     //@ no_state 
-    public string substring(int start, int end);
+    public string substring(bigint start, bigint end);
   
 
 }

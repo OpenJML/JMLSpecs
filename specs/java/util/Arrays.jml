@@ -2032,7 +2032,7 @@ public final class Arrays {
 //    public static <T> java.util.stream.Stream<T> stream(T[], int, int);
 
     //@ public normal_behavior
-    //@   ensures \seq.<Integer>equals(\result.values,\seq.of(arr));
+    //@   ensures \seq.<Integer>equals(\result.values,\seq.<Integer>of(arr));
     //@ pure
     public static java.util.stream.IntStream stream(int[] arr);
 //    public static java.util.stream.IntStream stream(int[], int, int);

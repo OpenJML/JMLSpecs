@@ -1,55 +1,64 @@
 package org.jmlspecs.lang;
 
-//@ immutable no_state
-public class array<T> implements IJmlPrimitiveType, IJmlIntArrayLike {
- /* @   
-    model public \bigint length;
-    public invariant length >= 0;
-    
-    public normal_behavior
-        ensures \result.length == a.length;
-        ensures (\forall int i; 0 <= i < a.length; \result.get(i) == a[i]);
-    model public static <T> array<T> of(T[] a);
-    
-    public normal_behavior
-        ensures \result.length == a.length;
-        ensures (\forall int i; 0 <= i < a.length; \result.get(i) == a[i]);
-    model public static array<Integer> of(int[] a);
-    
-    public normal_behavior
-        ensures \result.length == a.length;
-        ensures (\forall int i; 0 <= i < a.length; \result.get(i) == a[i]);
-    model public static <T,U> array<T> ofx(U[] a);  // U must be assignable to T
-    
-    public normal_behavior
-        ensures \result == this[i];
-    model public T get(\bigint i);
-    
-    public normal_behavior
-       ensures \result.length == this.length;
-       ensures \result[i] == t;
-       ensures (\forall \bigint j; j != i ; this[j] == \result[j]);
-       ensures this[i] == t ==> \result == this;
-    model public array<T> put(\bigint i, T t);
-    
-    public normal_behavior
-       ensures \result.length == this.length + 1;
-       ensures \result[this.length] == t;
-       ensures (\forall \bigint j; j != this.length ; this[j] == \result[j]);
-    model public array<T> add(T t);
-    
-    public normal_behavior
-       ensures \result == (s.length == ss.length && \forall \bigint i; 0 <= i && i < s.length; s[i] == ss[i]);
-    model public static <U,T> boolean equals(array<U> s, array<T> ss);
-    
-    public normal_behavior
-       ensures \result == (this == s || equals(this,s));
-    model public boolean equals(array<T> s);
-    
-    public normal_behavior
-       ensures \result == (\exists \bigint i; 0 <= i < this.length; this[i] == v);
-    model public <T> boolean contains(T v);
+import org.jmlspecs.lang.internal.*;
 
-    @*/
+//@ immutable 
+public class array<T> implements IJmlPrimitiveType, IJmlIntArrayLike {
+    //@ spec_public
+    private T[] value;
+
+    //@ public normal_behavior
+    //@   ensures \result == value.length;
+    //@ no_state
+    //@ model public bigint length();
+    
+    //@ public normal_behavior
+    //@   ensures \result.length() == a.length;
+    //-RAC@   ensures (\forall bigint i; 0 <= i < a.length; \result.get(i) == a[i.intValue()]);
+    //@ no_state
+    public static <TT> array<TT> of(TT[] a);
+    
+//    //@ public normal_behavior
+//    //@   ensures \result.length() == a.length();
+//    //-RAC@   ensures (\forall int i; 0 <= i < a.length(); \result.get(i) == a[i]);
+//    //@ no_state
+//    public static array<Integer> of(int[] a);
+//    
+//    //@ public normal_behavior
+//    //@   ensures \result.length() == a.length();
+//    //-RAC@   ensures (\forall int i; 0 <= i < a.length(); \result.get(i) == a[i]);
+//    //@ no_state
+//    public static <T,U> array<T> ofx(U[] a);  // U must be assignable to T
+    
+    //@ public normal_behavior
+    //-RAC@   ensures \result == this[i];
+    //@ no_state
+    public T get(bigint i);
+    
+    //@ public normal_behavior
+    //@   ensures \result.length() == this.length();
+    //-RAC@   ensures \result[i] == t;
+    //-RAC@   ensures (\forall \bigint j; j != i ; this[j] == \result[j]);
+    //-RAC@   ensures this[i] == t ==> \result == this;
+    public array<T> put(bigint i, T t);
+    
+    //@ public normal_behavior
+    //-RAC@   ensures \result == (this.length() == ss.length() && \forall \bigint i; 0 <= i && i < this.length(); this[i] == ss[i]);
+    //@ no_state
+    public boolean eq(array<T> ss);
+    
+    //@ public normal_behavior
+    //@   ensures !eq(ss);
+    //@ no_state
+    public boolean ne(array<T> ss);
+    
+//    public normal_behavior
+//       ensures \result == (this == s || equals(this,s));
+//    model public boolean equals(array<T> s);
+//    
+//    public normal_behavior
+//       ensures \result == (\exists \bigint i; 0 <= i < this.length(); this[i] == v);
+//    model public <T> boolean contains(T v);
+
 }
 
