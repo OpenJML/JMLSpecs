@@ -15,45 +15,46 @@ public class set<T> implements IJmlPrimitiveType, IJmlArrayLike {
     //@ public normal_behavior
     //@   ensures \result == this[x];
     //@ no_state
-    //@ model public boolean contains(T x);
+    public boolean contains(T x);
 
     //@ public normal_behavior
     //@   ensures \result == (this.size() == 0);
     //@ no_state
-  //@ model public boolean isEmpty();
+    public boolean isEmpty();
     
     //@ public normal_behavior
     //@   ensures \result.size() == 0;
     //@   ensures (\forall T x; ; !\result.contains(x));
     //@ no_state
-    static public <T> set<T> set();
+    static public <T> set<T> empty();
     
     //@ public normal_behavior
     //@   ensures \result.size() == 1;
-    //@  ensures \result.contains(t);
-    //@  ensures (\forall TT x; ; x != t ==> !\result.contains(x));  // FIXME - thinks T is non-static
+    //@  ensures \forall int i; 0 <= i < t.length; \result.contains(t[i]);
+    //@  ensures (\forall int i; 0 <= i < t.length; !\result.contains(t[i]));
     //@ no_state
-  //@ model static public <TT> set<TT> set(TT t);
+    @SafeVarargs
+    static public <X> set<X> of(X ... t);
     
     //@ public normal_behavior
-    //@   ensures \result == (\forall TT t;; s.contains(t) == ss.contains(t));
+    //@   ensures \result == (\forall T t;; s.contains(t) == this.contains(t));
     //@ no_state
-  //@ model public static <TT> boolean eq(set<TT> s, set<TT> ss);
+    public  boolean eq(set<T> s);
     
     //@ public normal_behavior
-    //@   ensures \result == (this == s || eq(this,s));
+    //@   ensures \result == !eq(s);
     //@ no_state
-  //@ model public boolean equals(set<T> s);
+    public  boolean ne(set<T> s);
     
     //@ public normal_behavior
-    //@   ensures \result == (s == ss || eq(s, ss));
+    //@   ensures \result == (this == s || eq(s));
     //@ no_state
-  //@ model public static <TT> boolean equals(set<TT> s, set<TT> ss);
+    public boolean equals(set<T> s);
     
     //@ public normal_behavior
-    //@   ensures \result == (\forall TT t; s.contains(t) ; ss.contains(t)); // FIXME - thinks T is non-static
+    //@   ensures \result == (\forall T t; this.contains(t) ; s.contains(t)); // FIXME - thinks T is non-static
     //@ no_state
-  //@ model public static <TT> boolean isSubsetOf(set<TT> s, set<TT> ss);
+    public boolean isSubsetOf(set<T> s);
     
     //@ public normal_behavior
     //@   ensures this.contains(x) ==> \result == this;
@@ -61,7 +62,7 @@ public class set<T> implements IJmlPrimitiveType, IJmlArrayLike {
     //@   ensures \result.contains(x);
     //@   ensures (\forall T t; t != x; \result.contains(t) == this.contains(t));
     //@ no_state
-  //@ model public set<T> add(T x);
+    public set<T> add(T x);
     
     //@ public normal_behavior
     //@   ensures b ==> \result == add(x);
@@ -75,11 +76,11 @@ public class set<T> implements IJmlPrimitiveType, IJmlArrayLike {
     //@   ensures !\result.contains(x);
     //@   ensures (\forall T t; t != x; \result.contains(t) == this.contains(t));
     //@ no_state
-  //@ model public set<T> remove(T x);
+    public set<T> remove(T x);
 
     // @ public normal_behavior
     // @   ensures \forall T j; this.contains(j);  p.apply(j) ==> \result.contains(j);
     // @   ensures \forall T j; \result.contains(j) ==> (this.contains(j) && p.apply(j));
     //@ no_state
-  //@ model public set<T> filter(java.util.function.Predicate<T> p);
+    public set<T> filter(java.util.function.Predicate<T> p);
 }

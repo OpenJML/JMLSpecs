@@ -6,7 +6,7 @@ import org.jmlspecs.lang.internal.*;
 //@ immutable no_state non_null_by_default
 public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
 
-    private String racValue; //@ in length;
+    private String racValue; //-RAC@ in length;
     
     //-RAC@ model public \bigint length;
     // @ private represents length = racValue.length();
@@ -41,6 +41,11 @@ public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
     //-RAC@   ensures \result == length;
     //@ no_state 
     public bigint size();
+    
+    //-RAC@ public normal_behavior
+    //-RAC@   ensures \result == length;
+    //@ no_state 
+    public bigint length();
     
     //-RAC@ public normal_behavior
     //-RAC@   ensures \result == this[i];
@@ -84,12 +89,12 @@ public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
     //-RAC@ ensures (\forall \bigint i;; (j+1 <= i < \result.length) ==> (\result[i] == this[i-1]));
     //-RAC@   ensures \result[j] == v;
     //@ no_state 
-    public string insert(bigint j, char v);// FIXME _ change int to bigint eventually
+    public string insert(bigint j, char v);
 
     //@ public normal_behavior
-    //@   ensures \result.length == this.length + 1;
+    //-RAC@   ensures \result.length == this.length + 1;
     //-RAC@ ensures (\forall \bigint i;; (0 <= i < this.length) ==> (\result[i] == this[i]));
-    //@  ensures \result[this.length] == v;
+    //-RAC@  ensures \result[this.length] == v;
     //@ no_state
     public string add(char v);
 
@@ -106,7 +111,7 @@ public final class string implements IJmlPrimitiveType, IJmlIntArrayLike {
     //-RAC@   ensures (\forall \bigint i;; (0 <= i < j) ==> (\result[i] == this[i]));
     //-RAC@   ensures (\forall \bigint i;; (j <= i < \result.length) ==> (\result[i] == this[i+1]));
     //@  no_state
-    public string remove(int j);
+    public string remove(bigint j);
     
     //-RAC@ public normal_behavior
     //-RAC@   requires 0 <= start <= end <= this.length;

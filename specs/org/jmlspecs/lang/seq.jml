@@ -61,7 +61,7 @@ public class seq<T> implements IJmlPrimitiveType, IJmlIntArrayLike {
     
     //@ public normal_behavior
     //@   ensures \result == (\exists \bigint i; 0 <= i < this.length; this[i] == v);
-    //@   ensures \result == (length == 0 ? false : (this[0] == v && this.tail(1).contains(v)));
+    //@   ensures \result == (length == 0 ? false : (this[0] == v || this.tail(1).contains(v)));
     //@ no_state
     public <T> boolean contains(T v);
     
