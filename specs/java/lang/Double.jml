@@ -124,7 +124,7 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
 
     //@ public normal_behavior
     //@   ensures true; // uninterpreted
-    //@ spec_pure helper
+    //@ no_state helper
     public static boolean isFinite(double v);
     
     /*@ public normal_behavior
@@ -136,7 +136,7 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
       @   ensures \result <==>
       @           (v == POSITIVE_INFINITY || v == NEGATIVE_INFINITY);
       @*/
-    public static /*@ spec_pure helper @*/ boolean isInfinite(double v);
+    public static /*@ no_state helper @*/ boolean isInfinite(double v);
 
     //@ public normal_behavior
     //@   ensures identical(theDouble, value);
@@ -157,7 +157,7 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
     /*@ public normal_behavior
       @   ensures \result == Double.isNaN(theDouble);
       @*/
-    //@ helper
+    //@ helper no_state
     public boolean isNaN();
 
     /*@ public normal_behavior
@@ -177,36 +177,42 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
     /*@ also
       @   public normal_behavior
       @     ensures \result == (byte) theDouble;
+      @ spec_pure
       @*/
     public byte byteValue();
 
     /*@ also
       @   public normal_behavior
       @     ensures \result == (short) theDouble;
+      @ spec_pure
       @*/
     public short shortValue();
 
     /*@ also
       @   public normal_behavior
       @     ensures \result == (int) theDouble;
+      @ spec_pure
       @*/
     public int intValue();
 
     /*@ also
       @   public normal_behavior
       @     ensures \result == (long) theDouble;
+      @ spec_pure
       @*/
     public long longValue();
 
     /*@ also
       @   public normal_behavior
       @     ensures Float.identical(\result, (float) theDouble);
+      @ spec_pure
       @*/
     public float floatValue();
 
     /*@ also
       @   public normal_behavior
       @     ensures identical(\result, theDouble);
+      @ spec_pure
       @ helper // FIXME - should be inherited?
       @*/
     public double doubleValue();

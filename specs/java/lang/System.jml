@@ -282,6 +282,7 @@ t *);
     @      assignable da[destPos .. destPos + length_ - 1];
     @      ensures java.util.Arrays.equalArrays(da,destPos,sa,srcPos,length_);
     @   |}
+      |}
     @*//* @
 
 //       also  // FIXME - if we enable these cases, then a real-arithmetic logic is required and solving times are very long
@@ -308,7 +309,7 @@ t *);
 //      @   |}
 //      @
       @*/
-//@       |}
+// @       |}
     //@ helper
     @org.jmlspecs.annotation.Options("--lang=openjml")
     public static native void arraycopy(/*@nullable*/ Object src,
