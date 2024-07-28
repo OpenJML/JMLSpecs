@@ -396,19 +396,18 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
     /** Returns true if the argument is a negative (and not positive) zero;
         the usual == returns true for comparing positive and negative zero.
     */  
-    /*@ public static model spec_pure helper boolean isNegativeZero( double a) {
-          if (a != 0) return false;
-          return (java.lang.Double.valueOf(a)).equals(java.lang.Double.valueOf("-0.0"));
+     //+RAC@ inline
+     /*@ public static model spec_pure helper boolean isNegativeZero( double a) {
+          return a == 0 && (java.lang.Double.valueOf(a)).equals(java.lang.Double.valueOf("-0.0"));
         } 
       @*/          
       
     /** Returns true if the argument is a positive (and not negative) zero;
         the usual == returns true for comparing positive and negative zero.
     */ 
-
+    //+RAC@ inline
     /*@ public static model spec_pure helper boolean isPositiveZero( double a) {
-          if (a != 0) return false;
-          return (java.lang.Double.valueOf(a)).equals(java.lang.Double.valueOf("+0.0"));
+          return a == 0 && (java.lang.Double.valueOf(a)).equals(java.lang.Double.valueOf("+0.0"));
         }    
       @*/ 
 
@@ -423,6 +422,7 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
                               (isNaN(a) || isNaN(b) || (a==b))
                               );
      */
+    //+RAC@ inline
     /*@ public static model spec_pure helper boolean identical(double a, double b) {
       return (isNaN(a) == isNaN(b)) &&
                  (isPositiveZero(a) == isPositiveZero(b)) &&
@@ -432,5 +432,5 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
     */
     
     //@ pure model public static boolean isFiniteOdd(double d);
-    //@ pure model public static boolean isFiniteEvend(double d);
+    //@ pure model public static boolean isFiniteEven(double d);
 }

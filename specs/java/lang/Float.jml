@@ -378,6 +378,7 @@ public /*@ pure @*/ final class Float extends Number implements Comparable<Float
     /** Returns true if the argument is a negative (and not positive) zero;
         the usual == returns true for comparing positive and negative zero. 
     */
+    //+RAC@ inline
     /*@ public static model pure boolean isNegativeZero( float a) {
           if (a != 0) return false;
           return (java.lang.Float.valueOf(a)).equals(java.lang.Float.valueOf("-0.0f"));
@@ -387,6 +388,7 @@ public /*@ pure @*/ final class Float extends Number implements Comparable<Float
     /** Returns true if the argument is a positive (and not negative) zero;
         the usual == returns true for comparing positive and negative zero. 
     */
+    //+RAC@ inline
     /*@ public static model pure boolean isPositiveZero( float a) {
           if (a != 0) return false;
           return (java.lang.Float.valueOf(a)).equals(java.lang.Float.valueOf("+0.0f"));
@@ -397,6 +399,7 @@ public /*@ pure @*/ final class Float extends Number implements Comparable<Float
         the usual == does not work to distinguish positive and negative
         zeros or to identify two NaN values as equal.
     */
+    //+RAC@ inline
     /*@ public static model pure boolean identical(float a, float b) {
           return (isNaN(a) == isNaN(b)) &&
                  (isPositiveZero(a) == isPositiveZero(b)) &&
