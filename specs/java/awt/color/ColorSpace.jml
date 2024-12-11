@@ -12,7 +12,7 @@ public abstract class ColorSpace extends Object implements java.io.Serializable 
     public static final int TYPE_8CLR;
     public static final int TYPE_ACLR;
     // private static /*@non_null*/ ColorSpace sRGBspace;
-    static final long serialVersionUID;
+    private static final long serialVersionUID;
     public static final int CS_LINEAR_RGB;
     public static final int TYPE_4CLR;
     public static final int TYPE_FCLR;
@@ -50,29 +50,40 @@ public abstract class ColorSpace extends Object implements java.io.Serializable 
 
     // METHODS AND CONSTRUCTORS
 
+    //@ strictly_pure
     public int getNumComponents();
 
+    //@ strictly_pure
     public int getType();
 
+    //@ strictly_pure
     public boolean isCS_sRGB();
 
+    //@ strictly_pure
     public float getMaxValue(int Param0);
 
+    //@ strictly_pure
     public float getMinValue(int Param0);
 
+    //@ pure
     protected ColorSpace(int Param0, int Param1);
 
-    public abstract float /*@non_null*/ [] fromCIEXYZ(float /*@non_null*/ [] Param0);
+    //@ pure
+    public abstract float /*@non_null*/ [] fromCIEXYZ(float /*@non_null*/ [] colorvalue);
 
-    public abstract float /*@non_null*/ [] fromRGB(float /*@non_null*/ [] Param0);
+    //@ pure
+    public abstract float /*@non_null*/ [] fromRGB(float /*@non_null*/ [] rgbvalue);
 
-    public abstract float /*@non_null*/ [] toCIEXYZ(float /*@non_null*/ [] Param0);
+    //@ pure
+    public abstract float /*@non_null*/ [] toCIEXYZ(float /*@non_null*/ [] colorvalue);
 
-    public abstract float /*@non_null*/ [] toRGB(float /*@non_null*/ [] Param0);
+    //@ pure
+    public abstract float /*@non_null*/ [] toRGB(float /*@non_null*/ [] colorvalue);
 
-    public static /*@non_null*/ ColorSpace getInstance(int Param0);
 
-    static boolean isCS_CIEXYZ(/*@non_null*/ ColorSpace Param0);
+    //@ pure
+    public static /*@non_null*/ ColorSpace getInstance(int cspace);
 
-    public /*@non_null*/ String getName(int Param0);
+    //@ pure
+    public /*@non_null*/ String getName(int component);
 }
