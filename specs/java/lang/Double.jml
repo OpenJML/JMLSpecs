@@ -64,6 +64,8 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
         catch (Exception e) { return false; }
     }
     @*/
+    
+    //@ axiom \forall double d;; d == 0 <==> (isPositiveZero(d) || isNegativeZero(d));
 
     public static final double POSITIVE_INFINITY;
     //@ axiom \forall double d;; !isNaN(d) ==> d <= POSITIVE_INFINITY;
@@ -123,14 +125,14 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
         throws NumberFormatException;
 
     //@ public normal_behavior
-    //@   ensures true; // uninterpreted
+    //@   ensures true; // uninterpreted -- see axioms
     //@ no_state helper
     public static boolean isFinite(double v);
     
     /*@ public normal_behavior
       @   ensures \result == (!isFinite(v) && !isInfinite(v));
       @*/
-    public static /*@ spec_pure helper  @*/ boolean isNaN(double v);
+    public static /*@ no_state helper  @*/ boolean isNaN(double v);
 
     /*@ public normal_behavior
       @   ensures \result <==>
@@ -397,7 +399,7 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
         the usual == returns true for comparing positive and negative zero.
     */  
      //+RAC@ inline
-     /*@ public static model spec_pure helper boolean isNegativeZero( double a) {
+     /*@ public static model no_state helper boolean isNegativeZero( double a) {
           return a == 0 && (java.lang.Double.valueOf(a)).equals(java.lang.Double.valueOf("-0.0"));
         } 
       @*/          
@@ -406,7 +408,7 @@ public /*@ pure @*/ final class Double extends Number implements Comparable<Doub
         the usual == returns true for comparing positive and negative zero.
     */ 
     //+RAC@ inline
-    /*@ public static model spec_pure helper boolean isPositiveZero( double a) {
+    /*@ public static model no_state helper boolean isPositiveZero( double a) {
           return a == 0 && (java.lang.Double.valueOf(a)).equals(java.lang.Double.valueOf("+0.0"));
         }    
       @*/ 

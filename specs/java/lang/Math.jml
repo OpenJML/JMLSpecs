@@ -437,10 +437,14 @@ public /*@ pure @*/ final class Math {
       @   ensures (* result within 2 ulp of exact result *);
       @ |}
       @*/
-    public static /*@ pure @*/ double atan2(double y, double x);
+    public static /*@ no_state @*/ double atan2(double y, double x);
 
     /*@ public normal_behavior
       @ {|
+      @   requires Double.isFinite(a) && !(a == 0.0) && Double.isFinite(b);
+      @   ensures !Double.isNaN(\result);
+      @   ensures a > 0 && b > 0 ==> \result > 0;
+      @ also
       @   requires b == 0.0;
       @   ensures \result == 1.0;
       @ also
@@ -487,25 +491,26 @@ public /*@ pure @*/ final class Math {
       @   requires (isNegativeZero(a) && b < 0.0 && isFiniteOdd(b))
       @         || (a == Double.NEGATIVE_INFINITY && 0.0 < b && isFiniteOdd(b));
       @   ensures \result == Double.NEGATIVE_INFINITY;
-      @ also 
-      @   requires !Double.isInfinite(a) && a < 0.0;
-      @   ensures isFiniteEven(b) ==> \result == pow(abs(a), b);
-      @   ensures isFiniteOdd(b) ==> \result == -pow(abs(a), b);
-      @   ensures !Double.isInfinite(b) && b != rint(b) ==> Double.isNaN(\result);
-      @   ensures (* result is within 1 ulp of exact result *);
-      @ also
-      @   requires a == rint(a) && b == rint(b);
-      @   ensures 
-      @     (* result is exactly equal to the mathematical result of raising
-      @        a to the b power if that result can be represented exactly as
-      @        a double value *);
-      @   ensures (* result is within 1 ulp of exact result *);
-      // FIXME - needs an else alternative
-      @ also 
-      @   requires !Double.isInfinite(a) && Double.isNaN(a) && !Double.isInfinite(b) && Double.isNaN(b);
+
+//      @ also 
+//      @   requires !Double.isInfinite(a) && a < 0.0;
+//      @   ensures isFiniteEven(b) ==> \result == pow(abs(a), b);
+//      @   ensures isFiniteOdd(b) ==> \result == -pow(abs(a), b);
+//      @   ensures !Double.isInfinite(b) && b != rint(b) ==> Double.isNaN(\result);
+//      @   ensures (* result is within 1 ulp of exact result *);
+//      @ also
+//      @   requires a == rint(a) && b == rint(b);
+//      @   ensures 
+//      @     (* result is exactly equal to the mathematical result of raising
+//      @        a to the b power if that result can be represented exactly as
+//      @        a double value *);
+//      @   ensures (* result is within 1 ulp of exact result *);
+//      // FIXME - needs an else alternative
+//      @ also 
+//      @   requires !Double.isInfinite(a) && Double.isNaN(a) && !Double.isInfinite(b) && Double.isNaN(b);
       @ |}
       @*/
-    public static /*@ pure @*/ double pow(double a, double b);
+    public static /*@ no_state @*/ double pow(double a, double b);
 
     /*@ public normal_behavior
       @ {|
@@ -522,7 +527,7 @@ public /*@ pure @*/ final class Math {
       @   ensures \result == (int) Math.floor(a + 0.5f);
       @ |}
       @*/
-    public static /*@ pure @*/ int round(float a);
+    public static /*@ no_state @*/ int round(float a);
 
     /*@ public normal_behavior
       @ {|
@@ -607,8 +612,8 @@ public /*@ pure @*/ final class Math {
       @   ensures \result == -a;
       @ also
       @   ensures_redundantly !Double.isNaN(a) ==> 0.0 <= \result;
-      @   ensures_redundantly
-      @     \result == Double.longBitsToDouble((Double.doubleToLongBits(a)<<1)>>>1);
+      @   //ensures_redundantly
+      @   //  \result == Double.longBitsToDouble((Double.doubleToLongBits(a)<<1)>>>1);
       @ |}
       @*/
     public static /*@ pure @*/ double abs(double a);
