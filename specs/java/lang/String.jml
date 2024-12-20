@@ -1116,15 +1116,18 @@ public final class String
       @*/
     public static /*@ pure helper non_null @*/ String valueOf(double d);
     
+    //@ model public static \datagroup interns;
+    
     /*-RAC@  public normal_behavior
+      @   writes interns;
       @   ensures isInterned(\result);
       @   ensures equals(\result,this);
       @   ensures isInterned(this) ==> (\result == this);
       @*/
-    //@ pure
     public native /*@ non_null @*/ String intern();
 
     //@ public normal_behavior
+    //@   reads interns;
     //@   ensures true; // No restriction on result
     //@ spec_pure helper
     //@ public static model boolean isInterned(non_null String s);
